@@ -4,13 +4,19 @@
  * and open the template in the editor.
  */
 
-package Controle;
-import Model.Cliente;
+package laundrytech;
+
 /**
  *
  * @author Rodolfo
  */
-public class ControleCliente {
-    //teste
+public class LaundryTech {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+    }
     
 }
