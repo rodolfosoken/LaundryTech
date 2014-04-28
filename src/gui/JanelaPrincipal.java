@@ -66,7 +66,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jButton6.setText("Sair (F10)");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/logo-01.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/Images/logo2-01.jpg"))); // NOI18N
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
