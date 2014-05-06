@@ -10,7 +10,6 @@ import Model.Cliente;
  *
  * @author Rodolfo
  */
-public class ControleCliente {
-    //teste
+public class ControleCliente {    
     
 }

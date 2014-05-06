@@ -45,6 +45,16 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         setTitle("LaundryTech");
 
         jButton1.setText("<html>Lançamentos<p align='center'>(F2)</center></html>");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActLancamento(evt);
+            }
+        });
 
         jButton2.setText("Clientes");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +75,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
 
         jButton6.setText("Sair (F10)");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActButtonSair(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/Images/logo2-01.jpg"))); // NOI18N
 
@@ -118,7 +133,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addGap(55, 55, 55)
+                .addGap(18, 18, 18)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -135,6 +150,22 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void ActLancamento(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActLancamento
+        // TODO add your handling code here:
+        Lancamentos lancamentos = new Lancamentos();
+    }//GEN-LAST:event_ActLancamento
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        Lancamentos lancamentos = new Lancamentos();
+        lancamentos.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void ActButtonSair(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActButtonSair
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_ActButtonSair
 
     /**
      * @param args the command line arguments

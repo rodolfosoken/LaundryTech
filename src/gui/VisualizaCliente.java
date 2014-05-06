@@ -56,13 +56,13 @@ public class VisualizaCliente extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1"
+                "ROL", "Nome", "null"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
