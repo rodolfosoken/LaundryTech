@@ -9,8 +9,6 @@ package DAO;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.sql.Statement;
-import java.sql.SQLException;
 
 /**
  *
@@ -122,7 +120,7 @@ public class BD {
         //teste de recuperação de dados
         String s = (String) getValueAt(1, 2, "cliente");
         System.out.println(s);
-        insert("INSERT INTO laundrytech.cliente (`codClient`, nome, cpf, `CEP`, uf, rua, cidade, bairro, apto, complemento) VALUES (4125, 'nome', 401, 9726, 'uf', 'rua', 'cidade', 'bairro', 14, 'comple')");
+        //insert("INSERT INTO `laundrytech`.`clientes` (`idclientes`,`codigo`, `nome`, `endereco`, `complem`, `apto`, `bairro`, `cidade`, `uf`, `cep`, `tipo`, `nascimento`, `contato`, `telefone`, `telefone2`, `email`, `obs`) VALUES ('2','2', 'teste', 'teste', 'teste', '3', 'teste', 'teste', 'sp', '09726430', '1', '1992-03-23', 'testse', '41247464', '0', 'test', '');");
         finaliza();
 
 
