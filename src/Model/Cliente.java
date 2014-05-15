@@ -1,5 +1,6 @@
 package Model;
 
+import DAO.DAO_Cliente;
 import java.util.Vector;
 
 public class Cliente {
@@ -15,92 +16,166 @@ public class Cliente {
 	private String complemento;
 	private String endereco;
 	public Vector<ROL> unnamed_ROL_ = new Vector<ROL>();
+        
+        static DAO_Cliente dao = new DAO_Cliente();
+        
+        public boolean salvar(){
+            return dao.salvar(this);
+        }
 
-	public int getCodClient() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the codClient
+     */
+    public int getCodClient() {
+        return codClient;
+    }
 
-	public void setCodClient(int aCodClient) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param codClient the codClient to set
+     */
+    public void setCodClient(int codClient) {
+        this.codClient = codClient;
+    }
 
-	public String getNome() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the nome
+     */
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String aNome) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param nome the nome to set
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public long getCpf() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the cpf
+     */
+    public long getCpf() {
+        return cpf;
+    }
 
-	public void setCpf(long aCpf) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param cpf the cpf to set
+     */
+    public void setCpf(long cpf) {
+        this.cpf = cpf;
+    }
 
-	public int getCEP() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the CEP
+     */
+    public int getCEP() {
+        return CEP;
+    }
 
-	public void setCEP(int aCEP) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param CEP the CEP to set
+     */
+    public void setCEP(int CEP) {
+        this.CEP = CEP;
+    }
 
-	public String getUf() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the uf
+     */
+    public String getUf() {
+        return uf;
+    }
 
-	public void setUf(String aUf) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param uf the uf to set
+     */
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
 
-	public String getRua() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the rua
+     */
+    public String getRua() {
+        return rua;
+    }
 
-	public void setRua(String aRua) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param rua the rua to set
+     */
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
 
-	public String getCidade() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the cidade
+     */
+    public String getCidade() {
+        return cidade;
+    }
 
-	public void setCidade(String aCidade) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param cidade the cidade to set
+     */
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
 
-	public String getBairro() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the bairro
+     */
+    public String getBairro() {
+        return bairro;
+    }
 
-	public void setBairro(String aBairro) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param bairro the bairro to set
+     */
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
 
-	public int getApto() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the apto
+     */
+    public int getApto() {
+        return apto;
+    }
 
-	public void setApto(int aApto) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param apto the apto to set
+     */
+    public void setApto(int apto) {
+        this.apto = apto;
+    }
 
-	public String getComplemento() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the complemento
+     */
+    public String getComplemento() {
+        return complemento;
+    }
 
-	public void setComplemento(String aComplemento) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param complemento the complemento to set
+     */
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
 
-	public boolean cadCliente() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the endereco
+     */
+    public String getEndereco() {
+        return endereco;
+    }
 
-	public boolean consultaCliente(long aCpf) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param endereco the endereco to set
+     */
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+
 }
