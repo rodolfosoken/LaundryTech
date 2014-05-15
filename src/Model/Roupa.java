@@ -1,5 +1,6 @@
 package Model;
 
+import DAO.DAO_roupa;
 import java.util.Vector;
 
 public class Roupa {
@@ -9,40 +10,42 @@ public class Roupa {
 	private int medida;
 	public Tabela unnamed_Tabela_;
 	public Vector<ROL> unnamed_ROL_ = new Vector<ROL>();
+        
+        static DAO_roupa dao = new DAO_roupa();
 
 	public int getCodRoupa() {
-		throw new UnsupportedOperationException();
+		return codRoupa;
 	}
 
 	public void setCodRoupa(int aCodRoupa) {
-		throw new UnsupportedOperationException();
+		this.codRoupa = aCodRoupa;
 	}
 
 	public String getDescricao() {
-		throw new UnsupportedOperationException();
+		return descricao;
 	}
 
 	public void setDescricao(String aDescricao) {
-		throw new UnsupportedOperationException();
+		this.descricao = aDescricao;
 	}
 
 	public float getPreco() {
-		throw new UnsupportedOperationException();
+		return preco;
 	}
 
 	public void setPreco(float aPreco) {
-		throw new UnsupportedOperationException();
+		this.preco = aPreco;
 	}
 
 	public int getMedida() {
-		throw new UnsupportedOperationException();
+		return medida;
 	}
 
 	public void setMedida(int aMedida) {
-		throw new UnsupportedOperationException();
+		this.medida = aMedida;
 	}
 
 	public boolean cadRoupa() {
-		throw new UnsupportedOperationException();
+		return dao.salvar(this);
 	}
 }
