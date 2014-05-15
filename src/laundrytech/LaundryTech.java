@@ -16,8 +16,7 @@ public class LaundryTech {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // modificação de demonstração para o Guit
-        System.out.println("Alteração de demonstração");
+
     }
     
 }
