@@ -6,6 +6,8 @@
 
 package laundrytech;
 
+import gui.JanelaPrincipal;
+
 /**
  *
  * @author Rodolfo
@@ -16,8 +18,7 @@ public class LaundryTech {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // modificação de demonstração para o Guit
-        System.out.println("Alteração de demonstração");
+        JanelaPrincipal window = new JanelaPrincipal();
     }
     
 }
