@@ -16,10 +16,7 @@ public class Clientes extends javax.swing.JFrame {
      * Creates new form Clientes
      */
     public Clientes() {
-<<<<<<< HEAD
         this.setVisible(true);
-=======
->>>>>>> e21cb1c77823271baf3aa3c1b9714921bf9ca22e
         initComponents();
     }
 
@@ -31,7 +28,6 @@ public class Clientes extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-<<<<<<< HEAD
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("laundrytech?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
@@ -109,16 +105,11 @@ public class Clientes extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
-=======
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
->>>>>>> e21cb1c77823271baf3aa3c1b9714921bf9ca22e
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,18 +157,6 @@ public class Clientes extends javax.swing.JFrame {
         CadastraCliente winCliente = new CadastraCliente();
     }//GEN-LAST:event_novoActionPerformed
 
-=======
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
->>>>>>> e21cb1c77823271baf3aa3c1b9714921bf9ca22e
     /**
      * @param args the command line arguments
      */
@@ -214,7 +193,6 @@ public class Clientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
     private javax.swing.JButton altera;
     private java.util.List<gui.Clientes_1> clientes_1List;
     private java.util.List<gui.Clientes_1> clientes_1List1;
@@ -229,7 +207,5 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JButton novo;
     private javax.swing.JButton sair;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
-=======
->>>>>>> e21cb1c77823271baf3aa3c1b9714921bf9ca22e
     // End of variables declaration//GEN-END:variables
 }
