@@ -48,4 +48,46 @@ try {
         
         return confirm;
     }
+    
+    public Cliente recupera(int tel){
+        Cliente c = new Cliente();
+                     
+        if (consultaCliente(tel)) {
+            try {
+                
+                bd.ExecuteQuery("SELECT * FROM laundrytech.clientes WHERE codClient LIKE '" + tel + "'");
+                
+                bd.rs.first();
+
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_cliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Cliente não existe");
+        }
+        
+        return c; 
+    }
+    
+    
+    
+        public boolean consultaCliente(int tel) {
+        boolean existe = false;
+        
+        String SQL = "SELECT * FROM softbus.clientes WHERE CPF LIKE '" + tel + "'";
+        try {
+            BD.ExecuteQuery(SQL);
+            if (BD.rs.next()) {
+                existe = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return existe;
+    }
+    
+    
 }

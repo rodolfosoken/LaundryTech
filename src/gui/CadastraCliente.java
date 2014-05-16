@@ -19,6 +19,7 @@ public class CadastraCliente extends javax.swing.JFrame {
      * Creates new form CadastraCliente
      */
     public CadastraCliente() {
+        this.setVisible(true);
         initComponents();
     }
 

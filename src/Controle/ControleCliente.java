@@ -29,4 +29,13 @@ public abstract class  ControleCliente {
              
        return cliente.salvar();
    }
+   
+   public static HashMap<String, String> recuperaCliente(int tel){
+       Cliente cliente = new Cliente();
+       
+       HashMap<String, String> c = new HashMap<>();
+                    
+       return c;
+   }
+   
 }

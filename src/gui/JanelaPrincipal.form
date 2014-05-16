@@ -57,15 +57,15 @@
                   <Component id="jButton6" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jButton1" linkSize="1" min="-2" pref="95" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton2" linkSize="1" min="-2" pref="71" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jButton1" linkSize="1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="clientes" linkSize="1" min="-2" pref="71" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="jButton3" linkSize="1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton4" linkSize="1" min="-2" pref="93" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jButton4" linkSize="1" min="-2" pref="110" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton5" linkSize="1" min="-2" pref="81" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -80,7 +80,7 @@
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="jButton1" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton5" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" linkSize="2" alignment="2" min="-2" pref="56" max="-2" attributes="0"/>
+                  <Component id="clientes" linkSize="2" alignment="2" min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="jButton3" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton4" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -96,19 +96,19 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;Lan&#xe7;amentos&lt;p align=&apos;center&apos;&gt;(F2)&lt;/center&gt;&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;align=&apos;center&apos;&gt;Lan&#xe7;amentos&lt;p&gt;(F2)&lt;/center&gt;&lt;/html&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ActLancamento"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="clientes">
       <Properties>
         <Property name="text" type="java.lang.String" value="Clientes"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clientesActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton3">
