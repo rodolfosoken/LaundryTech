@@ -73,7 +73,7 @@ public class CadastraRoupa extends javax.swing.JFrame {
 
         jLabel10.setText("Preço");
 
-        preco.setText("0,00");
+        preco.setText("0.00");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Medida");
