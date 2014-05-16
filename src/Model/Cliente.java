@@ -22,11 +22,14 @@ public class Cliente {
         public boolean salvar(){
             return dao.salvar(this);
         }
+<<<<<<< HEAD
         
         public Cliente recupera(int tel){
             
            return this;
         }
+=======
+>>>>>>> e21cb1c77823271baf3aa3c1b9714921bf9ca22e
 
     /**
      * @return the codClient

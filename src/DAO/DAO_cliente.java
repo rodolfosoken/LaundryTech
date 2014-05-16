@@ -22,6 +22,7 @@ public class DAO_cliente {
     public DAO_cliente(){
         bd = BD.getBD();
     }
+<<<<<<< HEAD
     
     public boolean salvar(Cliente c){
         boolean confirm = false;
@@ -89,5 +90,32 @@ try {
         return existe;
     }
     
+=======
+>>>>>>> e21cb1c77823271baf3aa3c1b9714921bf9ca22e
     
+    public boolean salvar(Cliente c){
+        boolean confirm = false;
+try {
+            
+            String SQL =	 "INSERT INTO laundrytech.clientes "
+                    + "(`codClient`, nome, cpf, `CEP`, uf, rua, cidade, bairro, apto, complemento) "
+                    + "VALUES ('" + c.getCodClient() + "', '" + c.getNome()+ "', '" + c.getCpf() + "', '"
+                    + c.getCEP()+ "', '" + c.getUf() + "', '" + c.getRua() + "', '" + c.getCidade() + "', '" + c.getBairro() + "', '"
+                    + c.getApto()+ "', '" +c.getComplemento() + "')";
+            
+            BD.insert(SQL);
+            
+            confirm = true;
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: Preencha os campos corretamente");
+            confirm = false;
+            Logger.getLogger(DAO_cliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DAO_cliente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Falha na comunicação com o banco de dados");
+        }
+        
+        return confirm;
+    }
 }

@@ -18,7 +18,12 @@ public class LaundryTech {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+<<<<<<< HEAD
         JanelaPrincipal window = new JanelaPrincipal();
+=======
+        JanelaPrincipal janela = new JanelaPrincipal();
+
+>>>>>>> e21cb1c77823271baf3aa3c1b9714921bf9ca22e
     }
     
 }
