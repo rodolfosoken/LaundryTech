@@ -6,6 +6,10 @@
 
 package gui;
 
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.table.TableCellRenderer;
+
 /**
  *
  * @author Rodolfo
@@ -33,7 +37,22 @@ public class Lancamentos extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable(){
+
+            public Component prepareRenderer(
+                TableCellRenderer r, int rw, int col){
+                Component c = super.prepareRenderer(r,rw,col);
+                String cod = "123";
+                if(!cod.equals(String.valueOf(jTable1.getValueAt(rw,col)))){
+                    c.setBackground(Color.WHITE);
+                    c.setForeground(Color.BLACK);
+                }else{
+                    c.setBackground(Color.GREEN);
+                }
+                return c;
+            }
+        }
+        ;
         jButton6 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();

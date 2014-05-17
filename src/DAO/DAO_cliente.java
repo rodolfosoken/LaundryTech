@@ -58,6 +58,17 @@ try {
                 bd.ExecuteQuery("SELECT * FROM laundrytech.clientes WHERE codClient LIKE '" + tel + "'");
                 
                 bd.rs.first();
+                c.setNome(bd.rs.getString("nome"));
+                c.setApto(bd.rs.getInt("apto"));
+                c.setBairro(bd.rs.getString("bairro"));
+                c.setCEP(bd.rs.getInt("cep"));
+                c.setCidade(bd.rs.getString("cidade"));
+                c.setCodClient(bd.rs.getInt("codClient"));
+                c.setComplemento(bd.rs.getString("complemento"));
+                c.setCpf(bd.rs.getLong("cpf"));
+                c.setRua(bd.rs.getString("rua"));
+                c.setUf(bd.rs.getString("uf"));
+                
 
                 
             } catch (SQLException ex) {
@@ -75,7 +86,7 @@ try {
         public boolean consultaCliente(int tel) {
         boolean existe = false;
         
-        String SQL = "SELECT * FROM softbus.clientes WHERE CPF LIKE '" + tel + "'";
+        String SQL = "SELECT * FROM laundrytech.clientes WHERE codClient LIKE '" + tel + "'";
         try {
             BD.ExecuteQuery(SQL);
             if (BD.rs.next()) {

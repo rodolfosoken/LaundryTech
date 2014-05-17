@@ -30,10 +30,21 @@ public abstract class  ControleCliente {
        return cliente.salvar();
    }
    
-   public static HashMap<String, String> recuperaCliente(int tel){
+   public static HashMap<String, Object> recuperaCliente(int tel){
        Cliente cliente = new Cliente();
-       
-       HashMap<String, String> c = new HashMap<>();
+       cliente = cliente.recupera(tel);
+       HashMap<String, Object> c = new HashMap<>();
+       c.put("nome", cliente.getNome());
+       c.put("codigo", cliente.getCodClient());
+       c.put("apto", cliente.getApto());
+       c.put("bairro", cliente.getBairro());
+       c.put("cep", cliente.getCEP());
+       c.put("cidade", cliente.getCidade());
+       c.put("complem", cliente.getComplemento());
+       c.put("rua", cliente.getRua());
+       c.put("uf", cliente.getUf());
+       c.put("cpf", cliente.getCpf());
+       c.put("cep", cliente.getCEP());
                     
        return c;
    }

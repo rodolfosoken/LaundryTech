@@ -14,18 +14,16 @@ public class Cliente {
 	private String bairro;
 	private int apto;
 	private String complemento;
-	private String endereco;
 	public Vector<ROL> unnamed_ROL_ = new Vector<ROL>();
         
         static DAO_cliente dao = new DAO_cliente();
-        
+             
         public boolean salvar(){
             return dao.salvar(this);
         }
         
-        public Cliente recupera(int tel){
-            
-           return this;
+        public Cliente recupera(int tel){            
+            return  dao.recupera(tel);
         }
 
     /**
@@ -167,20 +165,5 @@ public class Cliente {
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
-
-    /**
-     * @return the endereco
-     */
-    public String getEndereco() {
-        return endereco;
-    }
-
-    /**
-     * @param endereco the endereco to set
-     */
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
 
 }

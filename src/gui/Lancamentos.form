@@ -146,6 +146,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;&#xa;    public Component prepareRenderer(&#xa;        TableCellRenderer r, int rw, int col){&#xa;        Component c = super.prepareRenderer(r,rw,col);&#xa;        String cod = &quot;123&quot;;&#xa;        if(!cod.equals(String.valueOf(jTable1.getValueAt(rw,col)))){&#xa;            c.setBackground(Color.WHITE);&#xa;            c.setForeground(Color.BLACK);&#xa;        }else{&#xa;            c.setBackground(Color.GREEN);&#xa;        }&#xa;        return c;&#xa;    }&#xa;}&#xa;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

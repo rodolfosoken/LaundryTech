@@ -47,6 +47,8 @@ public class Clientes extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clientes");
 
+        jTable1.setColumnSelectionAllowed(true);
+
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientes_1List1, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${codClient}"));
         columnBinding.setColumnName("Cod Client");
@@ -79,8 +81,9 @@ public class Clientes extends javax.swing.JFrame {
         columnBinding.setColumnName("Complemento");
         columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
-
+        jTableBinding.bind();
         jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         sair.setText("Sair(F10)");
         sair.addActionListener(new java.awt.event.ActionListener() {
@@ -156,7 +159,7 @@ public class Clientes extends javax.swing.JFrame {
         // instancia janela de cadastro de cliente
         CadastraCliente winCliente = new CadastraCliente();
     }//GEN-LAST:event_novoActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
