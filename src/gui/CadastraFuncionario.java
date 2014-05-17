@@ -6,10 +6,9 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Dialog;
-import javax.security.auth.callback.ConfirmationCallback;
+import java.util.HashMap;
 import javax.swing.JDialog;
-import javax.swing.WindowConstants;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -197,7 +196,7 @@ public class CadastraFuncionario extends javax.swing.JFrame {
     private void gerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenteActionPerformed
         if (gerente.isSelected()) {
             //abre tela de login
-            Login confirm = new Login();
+            Login confirm = new Login(2);
             JDialog dia = new JDialog(confirm);
             dia.setModal(true);     //cria JDialog modal para travar foco
             dia.setContentPane(confirm.getContentPane());
@@ -226,7 +225,36 @@ public class CadastraFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_sairActionPerformed
 
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
-        // TODO add your handling code here:
+        // botão ok
+        HashMap<String, String> f = new HashMap<>();
+        
+        //cadastra gerente
+        if (gerente.isSelected()) {
+            f.put("nome", nome.getText());
+            f.put("senha", senha.getText());
+            f.put("setor", nome.getText());
+            if (Controle.ControleFuncionario.cadFuncionario(f, 2)) {
+                JOptionPane.showMessageDialog(null, "Gerente cadastrado com sucesso!");
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro: Cadastro não efetivado");
+            }
+            
+        //cadastra atendente
+        } else if (atendente.isSelected()) {
+            f.put("nome", nome.getText());
+            f.put("senha", senha.getText());
+            if (Controle.ControleFuncionario.cadFuncionario(f, 1)) {
+                JOptionPane.showMessageDialog(null, "Atendente cadastrado com sucesso!");
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro: Cadastro não efetivado");
+            }
+        } else {
+            
+        //cargo indeterminado
+            JOptionPane.showMessageDialog(null, "Selecione o cargo");
+        }
     }//GEN-LAST:event_okActionPerformed
 
     private void desabilitar() {

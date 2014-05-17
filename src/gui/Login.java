@@ -21,8 +21,15 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     private boolean passOk = false;
+    private int acesso = 0;
 
     public Login() {
+        initComponents();
+
+    }
+
+    public Login(int acesso) {
+        this.acesso = acesso;
         initComponents();
 
     }
@@ -144,16 +151,25 @@ public class Login extends javax.swing.JFrame {
 
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
         // TODO add your handling code here:
-        passOk = Controle.ControleLogin.getPermissao(login.getText(), String.valueOf(senha.getPassword()), 2);
-        if (passOk) {
-            this.setVisible(false);
-            this.dispose();
+        if (acesso != 0) {
+            passOk = Controle.ControleLogin.getPermissao(login.getText(), String.valueOf(senha.getPassword()), acesso);
+            if (passOk) {
+                this.setVisible(false);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário / senha Inválido");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Usuário / senha Inválido");
+            passOk = Controle.ControleLogin.getPermissao(login.getText(), String.valueOf(senha.getPassword()));
+            if (passOk) {
+                this.setVisible(false);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário / senha Inválido");
+            }
         }
     }//GEN-LAST:event_okActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */

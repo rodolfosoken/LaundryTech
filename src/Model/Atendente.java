@@ -1,20 +1,29 @@
 package Model;
 
+import DAO.DAO_funcionario;
 import java.util.Vector;
 
 public class Atendente extends Funcionario {
 	private int comissao;
-	public Vector<ROL> unnamed_ROL_ = new Vector<ROL>();
+        static DAO_funcionario dao = new DAO_funcionario();
 
-	public void getComissao() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the comissao
+     */
+    public int getComissao() {
+        return comissao;
+    }
 
-	public void setComissao(Object aComissao) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param comissao the comissao to set
+     */
+    public void setComissao(int comissao) {
+        this.comissao = comissao;
+    }
+    
+    public boolean salvar(){
+        return dao.salvar(this);
+    }
 
-	public boolean cadAtendente() {
-		throw new UnsupportedOperationException();
-	}
+
 }

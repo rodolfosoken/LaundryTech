@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gui;
+
+import javax.swing.JDialog;
 
 /**
  *
@@ -16,8 +17,18 @@ public class JanelaPrincipal extends javax.swing.JFrame {
      * Creates new form JanelaPrincipal
      */
     public JanelaPrincipal() {
-        this.setVisible(true);
-        initComponents();
+        Login login = new Login();
+        JDialog jd = new JDialog(login);
+        jd.setModal(true);     //cria JDialog modal para travar foco
+        jd.setContentPane(login.getContentPane());
+        jd.setBounds(login.getBounds());
+        jd.setVisible(true);
+        if (login.isPassOk()) {
+            this.setVisible(true);
+            initComponents();
+        } else {
+            System.exit(0);
+        }
     }
 
     /**
@@ -45,7 +56,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LaundryTech");
 
-        jButton1.setText("<html><align='center'>Lançamentos<p>(F2)</center></html>");
+        jButton1.setText("<html>Lançamentos<p align='center'>(F2)</center></html>");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -147,7 +158,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesActionPerformed
         //abre janela de clientes
         Clientes winCliente = new Clientes();
-        
+
     }//GEN-LAST:event_clientesActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

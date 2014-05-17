@@ -3,42 +3,65 @@ package Model;
 public class Funcionario {
 	private String nome;
 	private int codFunc;
-	private int senha;
-	private boolean cargo;
+	private String senha;
+	private int cargo;
 
-	public String getNome() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the nome
+     */
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String aNome) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param nome the nome to set
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public int getCodFunc() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the codFunc
+     */
+    public int getCodFunc() {
+        return codFunc;
+    }
 
-	public void setCodFunc(int aCodFunc) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param codFunc the codFunc to set
+     */
+    public void setCodFunc(int codFunc) {
+        this.codFunc = codFunc;
+    }
 
-	public int getSenha() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the senha
+     */
+    public String getSenha() {
+        return senha;
+    }
 
-	public void setSenha(int aSenha) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param senha the senha to set
+     */
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
-	public boolean getCargo() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @return the cargo
+     */
+    public int getCargo() {
+        return cargo;
+    }
 
-	public void setCargo(boolean aCargo) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * @param cargo the cargo to set
+     */
+    public void setCargo(int cargo) {
+        this.cargo = cargo;
+    }
 
-	public boolean consultaFuncionario(int aCodFunc) {
-		throw new UnsupportedOperationException();
-	}
+
+
 }

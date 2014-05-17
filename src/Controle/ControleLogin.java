@@ -19,4 +19,8 @@ public class ControleLogin {
         return log.getPermissao(senha, login, acesso);
     }
     
+        public static boolean getPermissao(String senha, String login){
+        Login log = new Login();
+        return log.getPermissao(senha, login);
+    }
 }

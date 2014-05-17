@@ -24,7 +24,7 @@ public class DAO_login {
     public boolean getPermissao(String login, String senha, int acesso) {
         boolean existe = false;
 
-        String SQL = "SELECT * FROM laundrytech.funcionarios WHERE `nome`= '" + login + "' AND `cargo` = '" + acesso + "'";
+        String SQL = "SELECT * FROM laundrytech.funcionarios WHERE `nome`= '" + login + "' AND `senha` = '" + senha  + "' AND `cargo` = '" + acesso + "'";
         try {
             BD.ExecuteQuery(SQL);
             if (BD.rs.next()) {
@@ -36,4 +36,22 @@ public class DAO_login {
 
         return existe;
     }
+    
+        public boolean getPermissao(String login, String senha) {
+        boolean existe = false;
+
+        String SQL = "SELECT * FROM laundrytech.funcionarios WHERE `nome`= '" + login + "' AND `senha` = '" + senha  + "'";
+        try {
+            BD.ExecuteQuery(SQL);
+            if (BD.rs.next()) {
+                existe = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return existe;
+    }
+    
+    
 }

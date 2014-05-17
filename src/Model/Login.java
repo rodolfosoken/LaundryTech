@@ -50,4 +50,7 @@ public class Login {
         return dao.getPermissao(login, senha, acesso);
     }
     
+    public boolean getPermissao(String login, String senha){
+        return dao.getPermissao(login, senha);
+    }
 }
