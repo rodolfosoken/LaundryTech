@@ -1,28 +1,43 @@
 package Model;
 
 import DAO.DAO_cliente;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class Cliente {
-	private int codClient;
-	private String nome;
-	private long cpf;
-	private int CEP;
-	private String uf;
-	private String rua;
-	private String cidade;
-	private String bairro;
-	private int apto;
-	private String complemento;
-        
-        static DAO_cliente dao = new DAO_cliente();
-             
-        public boolean salvar(){
-            return dao.salvar(this);
-        }
-        
-        public Cliente recupera(int tel){            
-            return  dao.recupera(tel);
-        }
+
+    private int codClient;
+    private String nome;
+    private long cpf;
+    private int CEP;
+    private String uf;
+    private String rua;
+    private String cidade;
+    private String bairro;
+    private int apto;
+    private String complemento;
+
+    static DAO_cliente dao = new DAO_cliente();
+
+    public boolean salvar() {
+        return dao.salvar(this);
+    }
+
+    public Cliente recupera(int tel) {
+        return dao.recupera(tel);
+    }
+
+    public DefaultTableModel listaClientes() {
+        return dao.listaClientes();
+    }
+
+    public static DefaultTableModel procuraCliente(String SQL) {
+        return dao.procuraCliente(SQL);
+    }
+    
+    public Cliente recupera_row(int row){
+        return dao.recupera_row(row);
+    }
 
     /**
      * @return the codClient

@@ -153,10 +153,10 @@ public class VisualizaCliente extends javax.swing.JFrame {
     private void procurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procurarActionPerformed
         // procura o cliente pelo telefone (codigo)
         int tel = Integer.parseInt(codClient.getText());
-        HashMap<String,Object> c = Controle.ControleCliente.recuperaCliente(tel);
+        HashMap<String,String> c = Controle.ControleCliente.recuperaCliente(tel);
         
-        nome.setText((String)c.get("nome"));
-        endereco.setText((String)c.get("rua"));
+        nome.setText(c.get("nome"));
+        endereco.setText(c.get("rua"));
         
     }//GEN-LAST:event_procurarActionPerformed
 

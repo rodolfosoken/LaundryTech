@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gui;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import Model.Cliente;
-import Model.Roupa;
-import Model.Tabela;
-import Model.Atendente;
+import java.util.HashMap;
+import javax.swing.JDialog;
 
 /**
  *
@@ -21,13 +19,13 @@ public class NovoLancamento extends javax.swing.JFrame {
     /**
      * Creates new form NovoLancamento
      */
-    
-    Cliente cliente = new Cliente();
-    ArrayList<Roupa> roupa = new ArrayList<Roupa>();
-    
-    
+    HashMap<String, String> cliente;
+    HashMap<String, String> atendente;
+    HashMap<String, String> ROL;
+
     public NovoLancamento() {
         initComponents();
+        telefoneCliente.requestFocus();
     }
 
     /**
@@ -47,13 +45,11 @@ public class NovoLancamento extends javax.swing.JFrame {
         jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        telefoneCliente = new javax.swing.JTextPane();
         jLabel10 = new javax.swing.JLabel();
         nome = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        sair = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -67,6 +63,8 @@ public class NovoLancamento extends javax.swing.JFrame {
         horario = new javax.swing.JFormattedTextField();
         endereco = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
+        procura = new javax.swing.JButton();
+        telefoneCliente = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -122,21 +120,9 @@ public class NovoLancamento extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("Cliente");
 
-        telefoneCliente.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                telefoneClienteFocusLost(evt);
-            }
-        });
-        jScrollPane2.setViewportView(telefoneCliente);
-
         jLabel10.setText("Nome: ");
 
         nome.setEditable(false);
-        nome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeActionPerformed(evt);
-            }
-        });
 
         jButton4.setText("(F2) OK");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +131,12 @@ public class NovoLancamento extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("(F10) Sair");
+        sair.setText("(F10) Sair");
+        sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Prazo");
@@ -172,6 +163,19 @@ public class NovoLancamento extends javax.swing.JFrame {
         endereco.setEditable(false);
 
         jLabel17.setText("(dias)");
+
+        procura.setText("Procura");
+        procura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                procuraActionPerformed(evt);
+            }
+        });
+
+        telefoneCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                telefoneClienteKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -207,30 +211,34 @@ public class NovoLancamento extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                    .addComponent(telefoneCliente))
+                                .addGap(27, 27, 27)
+                                .addComponent(procura))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jButton4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(21, 21, 21)
-                                .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(sair)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton4, jButton5});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton4, sair});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(8, 8, 8)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(telefoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(procura))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -266,7 +274,7 @@ public class NovoLancamento extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -302,11 +310,6 @@ public class NovoLancamento extends javax.swing.JFrame {
         jLabel3.setText("Serviços");
 
         inclui.setText("Inlcui");
-        inclui.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IncluiActionPerformed(evt);
-            }
-        });
 
         altera.setText("Altera");
 
@@ -524,28 +527,45 @@ public class NovoLancamento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeActionPerformed
-
     private void geraRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_geraRolActionPerformed
         // Acionamento do botão OK de conclusão do ROL
-        
+
     }//GEN-LAST:event_geraRolActionPerformed
-
-    private void IncluiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IncluiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IncluiActionPerformed
-
-    private void telefoneClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telefoneClienteFocusLost
-
-    }//GEN-LAST:event_telefoneClienteFocusLost
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         Lancamentos win = new Lancamentos();
         win.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
+
+    private void procuraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procuraActionPerformed
+        // procura o cliente
+        ConsultaClientes c = new ConsultaClientes();
+        JDialog dia = new JDialog(c);
+        dia.setModal(true);     //cria JDialog modal para travar foco
+        dia.setContentPane(c.getContentPane());
+        dia.setBounds(c.getBounds());
+        dia.setVisible(true);
+        cliente = Controle.ControleCliente.recuperaCliente(c.getRowSelected());
+        nome.setText(cliente.get("nome"));
+        telefoneCliente.setText(cliente.get("codigo"));
+
+    }//GEN-LAST:event_procuraActionPerformed
+
+    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_sairActionPerformed
+
+    private void telefoneClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefoneClienteKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        cliente = Controle.ControleCliente.recuperaCliente(Integer.parseInt(telefoneCliente.getText()));
+        nome.setText(cliente.get("nome"));
+        telefoneCliente.setText(cliente.get("codigo"));
+        prazo.requestFocus();
+        }
+    }//GEN-LAST:event_telefoneClienteKeyPressed
 
     /**
      * @param args the command line arguments
@@ -590,7 +610,6 @@ public class NovoLancamento extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField horario;
     private javax.swing.JButton inclui;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
@@ -615,7 +634,6 @@ public class NovoLancamento extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -633,7 +651,9 @@ public class NovoLancamento extends javax.swing.JFrame {
     private javax.swing.JTextField nome;
     private javax.swing.JTextField obs;
     private javax.swing.JTextField prazo;
-    private javax.swing.JTextPane telefoneCliente;
+    private javax.swing.JButton procura;
+    private javax.swing.JButton sair;
+    private javax.swing.JTextField telefoneCliente;
     private javax.swing.JTextField tipoEntrega;
     // End of variables declaration//GEN-END:variables
 }

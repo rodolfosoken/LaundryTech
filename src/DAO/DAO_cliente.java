@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +19,7 @@ import javax.swing.JOptionPane;
 public class DAO_cliente {
 
     static BD bd;
+    DefaultTableModel modelo = new DefaultTableModel();
 
     public DAO_cliente() {
         bd = BD.getBD();
@@ -79,6 +81,39 @@ public class DAO_cliente {
         return c;
     }
 
+    public Cliente recupera_row(int row) {
+        Cliente c = new Cliente();
+
+        if (consultaCliente(row)) {
+            try {
+
+                bd.ExecuteQuery("SELECT * FROM laundrytech.clientes");
+                bd.rs.absolute(row);
+
+                bd.rs.first();
+                c.setNome(bd.rs.getString("nome"));
+                c.setApto(bd.rs.getInt("apto"));
+                c.setBairro(bd.rs.getString("bairro"));
+                c.setCEP(bd.rs.getInt("cep"));
+                c.setCidade(bd.rs.getString("cidade"));
+                c.setCodClient(bd.rs.getInt("codClient"));
+                c.setComplemento(bd.rs.getString("complemento"));
+                c.setCpf(bd.rs.getLong("cpf"));
+                c.setRua(bd.rs.getString("rua"));
+                c.setUf(bd.rs.getString("uf"));
+                
+                System.out.println(row);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_cliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Cliente não existe");
+        }
+
+        return c;
+    }
+
     public boolean consultaCliente(int tel) {
         boolean existe = false;
 
@@ -95,5 +130,49 @@ public class DAO_cliente {
         return existe;
     }
 
+    public DefaultTableModel listaClientes() {
+        modelo.setColumnIdentifiers(new Object[]{
+            "CPF", "Nome", "Telefone", "End.", "Cidade"});
+        modelo.setNumRows(0);
+        try {
+            bd.ExecuteQuery("SELECT * FROM laundrytech.clientes");
+            bd.rs.first();
+            do {
+                try {
+
+                    modelo.addRow(new Object[]{
+                        bd.rs.getObject("cpf"), bd.rs.getObject("nome"),
+                        bd.rs.getObject("codClient"), bd.rs.getObject("rua"),
+                        bd.rs.getObject("cidade")});
+                } catch (SQLException ex) {
+                    Logger.getLogger(DAO_cliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } while (bd.rs.next());
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return modelo;
+    }
+
+    public DefaultTableModel procuraCliente(String SQL) {
+        String SQL_full = "SELECT * FROM laundrytech.clientes WHERE " + SQL;
+        //faz a busca no banco de dados
+        try {
+            //remove as linhas da consulta anterior    
+            modelo.setNumRows(0);
+
+            bd.ExecuteQuery(SQL_full);
+            while (bd.rs.next()) {
+                modelo.addRow(new Object[]{bd.rs.getObject("cpf"),
+                    bd.rs.getObject("nome"), bd.rs.getObject("codClient"),
+                    bd.rs.getObject("rua"), bd.rs.getObject("cidade")});
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return modelo;
+    }
 
 }

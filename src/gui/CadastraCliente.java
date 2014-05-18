@@ -13,13 +13,19 @@ import javax.swing.JOptionPane;
  * @author Rodolfo
  */
 public class CadastraCliente extends javax.swing.JFrame {
-
+    
     private boolean finish = false;
 
     /**
      * Creates new form CadastraCliente
      */
     public CadastraCliente() {
+        this.setVisible(true);
+        initComponents();
+    }
+
+    public CadastraCliente(String tel) {
+        codigo.setText(tel);
         this.setVisible(true);
         initComponents();
     }
@@ -280,7 +286,7 @@ public class CadastraCliente extends javax.swing.JFrame {
         dataCliente.put("uf", uf.getText());
         dataCliente.put("cpf", cpf.getText());
         dataCliente.put("cep", cep.getText());
-
+        
         if (Controle.ControleCliente.cadastraCliente(dataCliente)) {
             JOptionPane.showMessageDialog(null, "cadastro concluído!");
             finish = true;
@@ -300,7 +306,7 @@ public class CadastraCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         volta();
     }//GEN-LAST:event_formWindowClosing
-
+    
     public void volta() {
         Clientes win = new Clientes();
         win.setVisible(true);
@@ -381,5 +387,5 @@ public class CadastraCliente extends javax.swing.JFrame {
     public void setFinish(boolean finish) {
         this.finish = finish;
     }
-
+    
 }
