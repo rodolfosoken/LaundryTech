@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gui;
 
 import java.util.HashMap;
@@ -14,6 +13,8 @@ import javax.swing.JOptionPane;
  * @author Rodolfo
  */
 public class CadastraCliente extends javax.swing.JFrame {
+
+    private boolean finish = false;
 
     /**
      * Creates new form CadastraCliente
@@ -57,7 +58,12 @@ public class CadastraCliente extends javax.swing.JFrame {
         sair = new javax.swing.JButton();
         ok = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -262,9 +268,9 @@ public class CadastraCliente extends javax.swing.JFrame {
 
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
         //captura campos de texto e envia para camada controle
-        
+
         HashMap<String, String> dataCliente = new HashMap<>();
-        dataCliente.put("nome", (String)nome.getText());
+        dataCliente.put("nome", (String) nome.getText());
         dataCliente.put("codigo", codigo.getText());
         dataCliente.put("rua", endereco.getText());
         dataCliente.put("complem", complem.getText());
@@ -273,19 +279,32 @@ public class CadastraCliente extends javax.swing.JFrame {
         dataCliente.put("cidade", cidade.getText());
         dataCliente.put("uf", uf.getText());
         dataCliente.put("cpf", cpf.getText());
-        dataCliente.put("cep",cep.getText());
-     
-        if(Controle.ControleCliente.cadastraCliente(dataCliente)){
-            JOptionPane.showMessageDialog(null,"cadastro concluído!");
+        dataCliente.put("cep", cep.getText());
+
+        if (Controle.ControleCliente.cadastraCliente(dataCliente)) {
+            JOptionPane.showMessageDialog(null, "cadastro concluído!");
+            finish = true;
+            volta();
             dispose();
         }
-        
+
     }//GEN-LAST:event_okActionPerformed
 
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         //destoi janela
+        volta();
         dispose();
     }//GEN-LAST:event_sairActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        volta();
+    }//GEN-LAST:event_formWindowClosing
+
+    public void volta() {
+        Clientes win = new Clientes();
+        win.setVisible(true);
+    }
 
     /**
      * @param args the command line arguments
@@ -348,5 +367,19 @@ public class CadastraCliente extends javax.swing.JFrame {
     private javax.swing.JButton sair;
     private javax.swing.JTextField uf;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the finish
+     */
+    public boolean isFinish() {
+        return finish;
+    }
+
+    /**
+     * @param finish the finish to set
+     */
+    public void setFinish(boolean finish) {
+        this.finish = finish;
+    }
 
 }

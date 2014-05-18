@@ -1,7 +1,6 @@
 package Model;
 
 import DAO.DAO_funcionario;
-import java.util.Vector;
 
 public class Atendente extends Funcionario {
 	private int comissao;
@@ -24,6 +23,8 @@ public class Atendente extends Funcionario {
     public boolean salvar(){
         return dao.salvar(this);
     }
-
+        public Atendente recupera(String senha){            
+            return  dao.recuperaAtendente(senha);
+        }
 
 }

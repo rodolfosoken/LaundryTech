@@ -65,7 +65,7 @@ public class BD {
         stmt = (Statement) conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         rs = stmt.executeQuery("SELECT * FROM laundrytech." + tabela);
         rs.last();
-        System.out.println("Número de linhas:" + rs.getRow());
+        //System.out.println("Número de linhas:" + rs.getRow());
         int row = rs.getRow();
         return row;
     }

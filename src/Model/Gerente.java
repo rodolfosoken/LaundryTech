@@ -24,5 +24,9 @@ public class Gerente extends Funcionario {
     public boolean salvar() {
         return dao.salvar(this);
     }
+    
+    public Gerente recuperaGerente(String senha){
+        return dao.recuperaGerente(senha);
+    }
 
 }

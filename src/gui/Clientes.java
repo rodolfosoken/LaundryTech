@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gui;
+
+import javax.swing.JDialog;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -35,6 +38,17 @@ public class Clientes extends javax.swing.JFrame {
         clientes_1List = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clientes_1Query.getResultList();
         clientes_1Query1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Clientes_1 c");
         clientes_1List1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clientes_1Query1.getResultList();
+        clientes_1Query2 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Clientes_1 c");
+        clientes_1List2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clientes_1Query2.getResultList();
+        clientes_1Query3 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Clientes_1 c");
+        clientes_1List3 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clientes_1Query3.getResultList();
+        clientes_1Query4 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Clientes_1 c");
+        clientes_1List4 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clientes_1Query4.getResultList();
+        clientes_11 = new Model.Clientes_1();
+        clientes_1Query5 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Clientes_1 c");
+        clientes_1List5 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clientes_1Query5.getResultList();
+        clientes_1Query6 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Clientes_1 c");
+        clientes_1List6 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clientes_1Query6.getResultList();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         sair = new javax.swing.JButton();
@@ -44,7 +58,7 @@ public class Clientes extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clientes");
 
         jTable1.setColumnSelectionAllowed(true);
@@ -144,6 +158,8 @@ public class Clientes extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {altera, novo});
+
         bindingGroup.bind();
 
         pack();
@@ -151,15 +167,18 @@ public class Clientes extends javax.swing.JFrame {
 
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         // TODO add your handling code here:
-        
+
         dispose();
     }//GEN-LAST:event_sairActionPerformed
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
         // instancia janela de cadastro de cliente
         CadastraCliente winCliente = new CadastraCliente();
+        winCliente.setVisible(true);
+        dispose();
+
     }//GEN-LAST:event_novoActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
@@ -197,10 +216,21 @@ public class Clientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton altera;
-    private java.util.List<gui.Clientes_1> clientes_1List;
-    private java.util.List<gui.Clientes_1> clientes_1List1;
+    private Model.Clientes_1 clientes_11;
+    private java.util.List<Model.Clientes_1> clientes_1List;
+    private java.util.List<Model.Clientes_1> clientes_1List1;
+    private java.util.List<Model.Clientes_1> clientes_1List2;
+    private java.util.List<Model.Clientes_1> clientes_1List3;
+    private java.util.List<Model.Clientes_1> clientes_1List4;
+    private java.util.List<Model.Clientes_1> clientes_1List5;
+    private java.util.List<Model.Clientes_1> clientes_1List6;
     private javax.persistence.Query clientes_1Query;
     private javax.persistence.Query clientes_1Query1;
+    private javax.persistence.Query clientes_1Query2;
+    private javax.persistence.Query clientes_1Query3;
+    private javax.persistence.Query clientes_1Query4;
+    private javax.persistence.Query clientes_1Query5;
+    private javax.persistence.Query clientes_1Query6;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

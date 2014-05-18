@@ -1,10 +1,14 @@
 package Model;
 
+import DAO.DAO_funcionario;
+
 public class Funcionario {
 	private String nome;
 	private int codFunc;
 	private String senha;
 	private int cargo;
+        
+        DAO_funcionario dao = new DAO_funcionario();
 
     /**
      * @return the nome
@@ -62,6 +66,8 @@ public class Funcionario {
         this.cargo = cargo;
     }
 
-
+public static int qtdFunc(){
+    return DAO_funcionario.qtdFunc();
+}
 
 }

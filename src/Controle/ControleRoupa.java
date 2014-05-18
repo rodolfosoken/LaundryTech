@@ -11,7 +11,8 @@ import java.util.HashMap;
  *
  * @author Rodolfo
  */
-public abstract class  ControleRoupa {    
+public abstract class  ControleRoupa {
+    
    public static boolean cadastraRoupa(HashMap<String,String> dataRoupa){
        
        Roupa roupa = new Roupa();
@@ -22,4 +23,6 @@ public abstract class  ControleRoupa {
              
        return roupa.cadRoupa();
    }
+   
+   
 }

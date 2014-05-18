@@ -1,7 +1,6 @@
 package Model;
 
 import DAO.DAO_cliente;
-import java.util.Vector;
 
 public class Cliente {
 	private int codClient;
@@ -14,7 +13,6 @@ public class Cliente {
 	private String bairro;
 	private int apto;
 	private String complemento;
-	public Vector<ROL> unnamed_ROL_ = new Vector<ROL>();
         
         static DAO_cliente dao = new DAO_cliente();
              

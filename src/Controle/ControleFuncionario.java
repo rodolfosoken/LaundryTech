@@ -33,5 +33,37 @@ public abstract class ControleFuncionario {
             return a.salvar();
         }
     }
+    
+    public static HashMap<String, String> recuperaAtendente(String senha){
+        Atendente a = new Atendente();
+        a = a.recupera(senha);
+        
+        HashMap<String, String> at = new HashMap<>();
+        at.put("nome", a.getNome());
+        at.put("senha", a.getSenha());
+        at.put("cargo", String.valueOf(a.getCargo()));
+        at.put("comissao", String.valueOf(a.getComissao()));
+        at.put("codFunc", String.valueOf(a.getCodFunc()));
+               
+        return at;
+    }
+    
+        public static HashMap<String, String> recuperaGerente(String senha){
+        Gerente g = new Gerente();
+        g = g.recuperaGerente(senha);
+        
+        HashMap<String, String> ge = new HashMap<>();
+        ge.put("nome", g.getNome());
+        ge.put("senha", g.getSenha());
+        ge.put("cargo", String.valueOf(g.getCargo()));
+        ge.put("setor", String.valueOf(g.getSetor()));
+        ge.put("codFunc", String.valueOf(g.getCodFunc()));
+               
+        return ge;
+    }
+        
+        public static int qtdFunc(){
+            return DAO.DAO_funcionario.qtdFunc();
+        }
 
 }

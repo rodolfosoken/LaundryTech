@@ -22,6 +22,7 @@ public class CadastraFuncionario extends javax.swing.JFrame {
     public CadastraFuncionario() {
         initComponents();
         desabilitar();
+        codigo.setText(String.valueOf(Controle.ControleFuncionario.qtdFunc()+1));
 
     }
 
