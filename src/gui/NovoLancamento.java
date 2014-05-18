@@ -5,15 +5,14 @@
  */
 package gui;
 
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,9 +24,11 @@ public class NovoLancamento extends javax.swing.JFrame {
     /**
      * Creates new form NovoLancamento
      */
-    HashMap<String, String> cliente;
-    HashMap<String, String> atendente;
-    HashMap<String, String> ROL;
+    private int qtd = 0;
+    HashMap<String, String> cliente = new HashMap<>();
+    HashMap<String, String> atendente = new HashMap<>();
+    HashMap<String, String> ROL = new HashMap<>();
+    String[][] roupas;
     DefaultTableModel modelo = new DefaultTableModel();
 
     public NovoLancamento() {
@@ -35,6 +36,8 @@ public class NovoLancamento extends javax.swing.JFrame {
         telefoneCliente.requestFocus();
         defineHorario();
         criaTabela();
+        status.setSelectedIndex(2);
+        numRol.setText(String.valueOf(Controle.ControleRol.qtdROL()+1));
 
     }
 
@@ -49,23 +52,36 @@ public class NovoLancamento extends javax.swing.JFrame {
 
     public void criaTabela() {
         modelo.setColumnIdentifiers(new Object[]{
-            "Descrição", "Qtd.", "Preço"});
+            "Cod.", "Descrição", "Qtd.", "Preço"});
         jTable1.setModel(modelo);
 
     }
 
-    public void addItem(String desc, String qtd, String preco) {
-        modelo.addRow(new Object[]{desc, qtd, preco});
+    public void addItem(String cod, String desc, String qtd, String preco) {
+        modelo.addRow(new Object[]{cod, desc, qtd, preco});
         jTable1.repaint();
     }
 
-    public void soma() {
-        float sum = 0;
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            sum += (Float.parseFloat(String.valueOf(jTable1.getValueAt(i, 2))) * Float.parseFloat(String.valueOf(jTable1.getValueAt(i, 1))));
-        }
+    public int getQtdPecas() {
+        qtd = jTable1.getRowCount();
+        qtdPecas.setText(String.valueOf(qtd + 1));
+        return qtd;
+    }
 
+    public void soma() {
+        float sum = 0, descval = 0, pgt = 0;
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            sum += (Float.parseFloat(String.valueOf(jTable1.getValueAt(i, 3))) * Float.parseFloat(String.valueOf(jTable1.getValueAt(i, 2))));
+        }
         Subtotal.setText(String.valueOf(sum));
+        float desc = Float.parseFloat(String.valueOf(porcentagem.getText()));
+        desc = (desc / 100);
+        descval = -(desc * sum);
+        Desconto.setText(String.valueOf(descval));
+        sum = sum + descval;
+        TotalFinal.setText(String.valueOf(sum));
+        sum = sum - pgt;
+        Saldo.setText(String.valueOf(sum));
 
     }
 
@@ -80,7 +96,7 @@ public class NovoLancamento extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        numRol = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         emissao = new javax.swing.JFormattedTextField();
         hora = new javax.swing.JFormattedTextField();
@@ -106,6 +122,8 @@ public class NovoLancamento extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         procura = new javax.swing.JButton();
         telefoneCliente = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        status = new javax.swing.JList();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -128,8 +146,10 @@ public class NovoLancamento extends javax.swing.JFrame {
         TotalFinal = new javax.swing.JTextField();
         Adiantamento = new javax.swing.JTextField();
         Saldo = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
+        porcentagem = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        qtdPecas = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Novo Lançamento");
@@ -143,8 +163,8 @@ public class NovoLancamento extends javax.swing.JFrame {
 
         jLabel1.setText("ROL");
 
-        jTextField1.setEditable(false);
-        jTextField1.setText("0");
+        numRol.setEditable(false);
+        numRol.setText("1");
 
         jLabel2.setText("Emissão");
 
@@ -209,6 +229,12 @@ public class NovoLancamento extends javax.swing.JFrame {
         entrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
         entrega.setText("28/05/2014");
 
+        tipoEntrega.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tipoEntregaFocusLost(evt);
+            }
+        });
+
         horario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
         horario.setText("13:00");
 
@@ -228,6 +254,13 @@ public class NovoLancamento extends javax.swing.JFrame {
                 telefoneClienteKeyPressed(evt);
             }
         });
+
+        status.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Pago", "Parcial", "Em aberto" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(status);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -258,10 +291,15 @@ public class NovoLancamento extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel17)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(endereco)))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(endereco))
+                                .addGap(60, 60, 60))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(sair))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel10)
@@ -271,13 +309,13 @@ public class NovoLancamento extends javax.swing.JFrame {
                                     .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                                     .addComponent(telefoneCliente))
                                 .addGap(27, 27, 27)
-                                .addComponent(procura))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(sair)))
+                                .addComponent(procura)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(313, 313, 313)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton4, sair});
@@ -292,27 +330,27 @@ public class NovoLancamento extends javax.swing.JFrame {
                         .addComponent(telefoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(procura))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(prazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(prazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel17))
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(entrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tipoEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tipoEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(endereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -321,13 +359,18 @@ public class NovoLancamento extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(obs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(23, 23, 23)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -399,7 +442,12 @@ public class NovoLancamento extends javax.swing.JFrame {
         Saldo.setEditable(false);
         Saldo.setText("0,00");
 
-        jTextField12.setText("0");
+        porcentagem.setText("0");
+        porcentagem.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                porcentagemFocusLost(evt);
+            }
+        });
 
         jLabel16.setText("(%)");
 
@@ -420,7 +468,7 @@ public class NovoLancamento extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(porcentagem, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -454,7 +502,7 @@ public class NovoLancamento extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Desconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(porcentagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -479,6 +527,10 @@ public class NovoLancamento extends javax.swing.JFrame {
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Adiantamento, Desconto, Saldo, Subtotal, TotalFinal});
 
+        jLabel18.setText("Qtd. Peças");
+
+        qtdPecas.setText("0");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -496,10 +548,15 @@ public class NovoLancamento extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(exclui, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(201, 201, 201))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel18)
+                                .addGap(115, 115, 115)
+                                .addComponent(qtdPecas))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(151, 151, 151))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -517,7 +574,11 @@ public class NovoLancamento extends javax.swing.JFrame {
                         .addComponent(jLabel3)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(qtdPecas))
+                .addGap(12, 12, 12)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -535,7 +596,7 @@ public class NovoLancamento extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(numRol, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -554,7 +615,7 @@ public class NovoLancamento extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(numRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(emissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -586,6 +647,51 @@ public class NovoLancamento extends javax.swing.JFrame {
 
     private void geraRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_geraRolActionPerformed
         // Acionamento do botão OK de conclusão do ROL
+        Login confirm = new Login();
+        JDialog dia = new JDialog(confirm);
+        dia.setModal(true);     //cria JDialog modal para travar foco
+        dia.setContentPane(confirm.getContentPane());
+        dia.setBounds(confirm.getBounds());
+        dia.setVisible(true);
+        if (confirm.isPassOk()) {
+            atendente = Controle.ControleFuncionario.recuperaAtendente(String.valueOf(confirm.getSenha_ins()));
+            
+            System.out.println(atendente.get("nome"));
+
+            //dados de entrada
+            ROL.put("cliente", cliente.get("codigo"));
+            ROL.put("nome", cliente.get("nome"));
+            ROL.put("codigo", numRol.getText());
+            ROL.put("emissao", emissao.getText());
+            ROL.put("saldo", Saldo.getText());
+            ROL.put("desconto", Desconto.getText());
+            ROL.put("data", entrega.getText());
+            ROL.put("tipoEnt", tipoEntrega.getText());
+            ROL.put("atendente", atendente.get("senha"));
+            ROL.put("status", String.valueOf(status.getSelectedIndex()));
+
+            // lista de roupas
+            getQtdPecas();
+            roupas = new String[qtd][5];
+            for (int i = 0; i < qtd; i++) {
+                for (int j = 0; j < 4; j++) {
+                    roupas[i][j] = String.valueOf(jTable1.getValueAt(i, j));
+                    //System.out.print(roupas[i][j] + "\t");
+                }
+                //System.out.println("");
+            }
+
+// insere numero do Rol para servir de chave estrangeira
+            for (int i = 0; i < qtd; i++) {
+                roupas[i][4] = numRol.getText();
+            }
+            Controle.ControleRol.geraRol(ROL, roupas);
+            JOptionPane.showConfirmDialog(null, "Emissão concluída!");
+            dispose();
+
+        } else {
+
+        }
 
     }//GEN-LAST:event_geraRolActionPerformed
 
@@ -646,11 +752,25 @@ public class NovoLancamento extends javax.swing.JFrame {
         dia.setContentPane(add.getContentPane());
         dia.setBounds(add.getBounds());
         dia.setVisible(true);
+        getQtdPecas();
         if (add.roupa[0] != null) {
-            addItem(add.roupa[1], add.roupa[3], add.roupa[2]);
+            addItem(add.roupa[0], add.roupa[1], add.roupa[3], add.roupa[2]);
             soma();
         }
     }//GEN-LAST:event_incluiActionPerformed
+
+    private void porcentagemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_porcentagemFocusLost
+        // TODO add your handling code here:
+        soma();
+    }//GEN-LAST:event_porcentagemFocusLost
+
+    private void tipoEntregaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tipoEntregaFocusLost
+        // TODO add your handling code here:
+        String delivery = "d";
+        if (delivery.equals(tipoEntrega.getText())) {
+            endereco.setText(cliente.get("rua"));
+        }
+    }//GEN-LAST:event_tipoEntregaFocusLost
 
     /**
      * @param args the command line arguments
@@ -711,6 +831,7 @@ public class NovoLancamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -724,6 +845,7 @@ public class NovoLancamento extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -731,13 +853,15 @@ public class NovoLancamento extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField nome;
+    private javax.swing.JTextField numRol;
     private javax.swing.JTextField obs;
+    private javax.swing.JTextField porcentagem;
     private javax.swing.JTextField prazo;
     private javax.swing.JButton procura;
+    private javax.swing.JTextField qtdPecas;
     private javax.swing.JButton sair;
+    private javax.swing.JList status;
     private javax.swing.JTextField telefoneCliente;
     private javax.swing.JTextField tipoEntrega;
     // End of variables declaration//GEN-END:variables

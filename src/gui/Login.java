@@ -22,6 +22,7 @@ public class Login extends javax.swing.JFrame {
      */
     private boolean passOk = false;
     private int acesso = 0;
+    private String senha_ins;
 
     public Login() {
         initComponents();
@@ -153,6 +154,7 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (acesso != 0) {
             passOk = Controle.ControleLogin.getPermissao(login.getText(), String.valueOf(senha.getPassword()), acesso);
+            senha_ins = senha.getText();
             if (passOk) {
                 this.setVisible(false);
                 this.dispose();
@@ -160,6 +162,7 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Usuário / senha Inválido");
             }
         } else {
+            senha_ins = senha.getText();
             passOk = Controle.ControleLogin.getPermissao(login.getText(), String.valueOf(senha.getPassword()));
             if (passOk) {
                 this.setVisible(false);
@@ -220,5 +223,12 @@ public class Login extends javax.swing.JFrame {
      */
     public boolean isPassOk() {
         return passOk;
+    }
+
+    /**
+     * @return the senha_ins
+     */
+    public String getSenha_ins() {
+        return senha_ins;
     }
 }
