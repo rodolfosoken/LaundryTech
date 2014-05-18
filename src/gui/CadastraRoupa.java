@@ -84,7 +84,7 @@ public class CadastraRoupa extends javax.swing.JFrame {
         medida.setText("43");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Cadastro de Cliente");
+        jLabel1.setText("Cadastro de Roupa");
 
         descricao.setColumns(20);
         descricao.setRows(5);

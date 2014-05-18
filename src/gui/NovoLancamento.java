@@ -5,10 +5,16 @@
  */
 package gui;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import javax.swing.JDialog;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,10 +28,45 @@ public class NovoLancamento extends javax.swing.JFrame {
     HashMap<String, String> cliente;
     HashMap<String, String> atendente;
     HashMap<String, String> ROL;
+    DefaultTableModel modelo = new DefaultTableModel();
 
     public NovoLancamento() {
         initComponents();
         telefoneCliente.requestFocus();
+        defineHorario();
+        criaTabela();
+
+    }
+
+    public void defineHorario() {
+        Date x = new Date();
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        emissao.setText(sdf1.format(x));
+        SimpleDateFormat sdf2 = new SimpleDateFormat("HH:MM:ss");
+        hora.setText(sdf2.format(x));
+        endereco.setBackground(Color.LIGHT_GRAY);
+    }
+
+    public void criaTabela() {
+        modelo.setColumnIdentifiers(new Object[]{
+            "Descrição", "Qtd.", "Preço"});
+        jTable1.setModel(modelo);
+
+    }
+
+    public void addItem(String desc, String qtd, String preco) {
+        modelo.addRow(new Object[]{desc, qtd, preco});
+        jTable1.repaint();
+    }
+
+    public void soma() {
+        float sum = 0;
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            sum += (Float.parseFloat(String.valueOf(jTable1.getValueAt(i, 2))) * Float.parseFloat(String.valueOf(jTable1.getValueAt(i, 1))));
+        }
+
+        Subtotal.setText(String.valueOf(sum));
+
     }
 
     /**
@@ -41,8 +82,8 @@ public class NovoLancamento extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        emissao = new javax.swing.JFormattedTextField();
+        hora = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -82,11 +123,11 @@ public class NovoLancamento extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        Subtotal = new javax.swing.JTextField();
+        Desconto = new javax.swing.JTextField();
+        TotalFinal = new javax.swing.JTextField();
+        Adiantamento = new javax.swing.JTextField();
+        Saldo = new javax.swing.JTextField();
         jTextField12 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
 
@@ -107,13 +148,13 @@ public class NovoLancamento extends javax.swing.JFrame {
 
         jLabel2.setText("Emissão");
 
-        jFormattedTextField1.setEditable(false);
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        jFormattedTextField1.setText("25/05/2014");
+        emissao.setEditable(false);
+        emissao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        emissao.setText("25/05/2014");
 
-        jFormattedTextField2.setEditable(false);
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance())));
-        jFormattedTextField2.setText("12:06:30");
+        hora.setEditable(false);
+        hora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance())));
+        hora.setText("12:06:30");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -154,11 +195,22 @@ public class NovoLancamento extends javax.swing.JFrame {
         jLabel15.setText("Obs.");
 
         prazo.setText("3");
+        prazo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                prazoFocusLost(evt);
+            }
+        });
+        prazo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                prazoKeyPressed(evt);
+            }
+        });
 
         entrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
         entrega.setText("28/05/2014");
 
         horario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        horario.setText("13:00");
 
         endereco.setEditable(false);
 
@@ -310,6 +362,11 @@ public class NovoLancamento extends javax.swing.JFrame {
         jLabel3.setText("Serviços");
 
         inclui.setText("Inlcui");
+        inclui.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                incluiActionPerformed(evt);
+            }
+        });
 
         altera.setText("Altera");
 
@@ -327,20 +384,20 @@ public class NovoLancamento extends javax.swing.JFrame {
 
         jLabel8.setText("(=) Saldo");
 
-        jTextField2.setEditable(false);
-        jTextField2.setText("0,00");
+        Subtotal.setEditable(false);
+        Subtotal.setText("0,00");
 
-        jTextField3.setEditable(false);
-        jTextField3.setText("0,00");
+        Desconto.setEditable(false);
+        Desconto.setText("0,00");
 
-        jTextField4.setEditable(false);
-        jTextField4.setText("0,00");
+        TotalFinal.setEditable(false);
+        TotalFinal.setText("0,00");
 
-        jTextField5.setEditable(false);
-        jTextField5.setText("0,00");
+        Adiantamento.setEditable(false);
+        Adiantamento.setText("0,00");
 
-        jTextField6.setEditable(false);
-        jTextField6.setText("0,00");
+        Saldo.setEditable(false);
+        Saldo.setText("0,00");
 
         jTextField12.setText("0");
 
@@ -359,7 +416,7 @@ public class NovoLancamento extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Adiantamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -367,36 +424,36 @@ public class NovoLancamento extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Desconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Saldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(TotalFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField2, jTextField3, jTextField4, jTextField5, jTextField6});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Adiantamento, Desconto, Saldo, Subtotal, TotalFinal});
 
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Desconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -404,23 +461,23 @@ public class NovoLancamento extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TotalFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Adiantamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Saldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextField2, jTextField3, jTextField4, jTextField5, jTextField6});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Adiantamento, Desconto, Saldo, Subtotal, TotalFinal});
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -482,9 +539,9 @@ public class NovoLancamento extends javax.swing.JFrame {
                         .addGap(46, 46, 46)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(emissao, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 327, Short.MAX_VALUE)
                 .addContainerGap())
@@ -499,8 +556,8 @@ public class NovoLancamento extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(emissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -533,9 +590,9 @@ public class NovoLancamento extends javax.swing.JFrame {
     }//GEN-LAST:event_geraRolActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
-        Lancamentos win = new Lancamentos();
-        win.setVisible(true);
+        // volta e atualiza a tela anterior
+        //Lancamentos win = new Lancamentos();
+        //win.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     private void procuraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procuraActionPerformed
@@ -559,13 +616,41 @@ public class NovoLancamento extends javax.swing.JFrame {
 
     private void telefoneClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefoneClienteKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-        cliente = Controle.ControleCliente.recuperaCliente(Integer.parseInt(telefoneCliente.getText()));
-        nome.setText(cliente.get("nome"));
-        telefoneCliente.setText(cliente.get("codigo"));
-        prazo.requestFocus();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            cliente = Controle.ControleCliente.recuperaCliente(Integer.parseInt(telefoneCliente.getText()));
+            nome.setText(cliente.get("nome"));
+            telefoneCliente.setText(cliente.get("codigo"));
+            prazo.requestFocus();
         }
     }//GEN-LAST:event_telefoneClienteKeyPressed
+
+    private void prazoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_prazoFocusLost
+        // soma os dias no prazo
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.add(GregorianCalendar.DAY_OF_MONTH, Integer.parseInt(prazo.getText()));
+        Date x = gc.getTime();
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        entrega.setText(sdf1.format(x));
+    }//GEN-LAST:event_prazoFocusLost
+
+    private void prazoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_prazoKeyPressed
+        // TODO add your handling code here:
+        tipoEntrega.requestFocus();
+    }//GEN-LAST:event_prazoKeyPressed
+
+    private void incluiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_incluiActionPerformed
+        // TODO add your handling code here:
+        AdicionaItem add = new AdicionaItem();
+        JDialog dia = new JDialog(add);
+        dia.setModal(true);     //cria JDialog modal para travar foco
+        dia.setContentPane(add.getContentPane());
+        dia.setBounds(add.getBounds());
+        dia.setVisible(true);
+        if (add.roupa[0] != null) {
+            addItem(add.roupa[1], add.roupa[3], add.roupa[2]);
+            soma();
+        }
+    }//GEN-LAST:event_incluiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -603,15 +688,20 @@ public class NovoLancamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Adiantamento;
+    private javax.swing.JTextField Desconto;
+    private javax.swing.JTextField Saldo;
+    private javax.swing.JTextField Subtotal;
+    private javax.swing.JTextField TotalFinal;
     private javax.swing.JButton altera;
+    private javax.swing.JFormattedTextField emissao;
     private javax.swing.JTextField endereco;
     private javax.swing.JFormattedTextField entrega;
     private javax.swing.JButton exclui;
+    private javax.swing.JFormattedTextField hora;
     private javax.swing.JFormattedTextField horario;
     private javax.swing.JButton inclui;
     private javax.swing.JButton jButton4;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -643,11 +733,6 @@ public class NovoLancamento extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField nome;
     private javax.swing.JTextField obs;
     private javax.swing.JTextField prazo;

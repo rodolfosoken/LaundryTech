@@ -63,7 +63,7 @@ public abstract class ControleFuncionario {
     }
         
         public static int qtdFunc(){
-            return DAO.DAO_funcionario.qtdFunc();
+            return Model.Funcionario.qtdFunc();
         }
 
 }
