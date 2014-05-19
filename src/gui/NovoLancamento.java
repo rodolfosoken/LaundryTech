@@ -686,7 +686,7 @@ public class NovoLancamento extends javax.swing.JFrame {
                 roupas[i][4] = numRol.getText();
             }
             Controle.ControleRol.geraRol(ROL, roupas);
-            JOptionPane.showConfirmDialog(null, "Emissão concluída!");
+            JOptionPane.showMessageDialog(null, "Emissão concluída!");
             dispose();
 
         } else {

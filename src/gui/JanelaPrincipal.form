@@ -42,7 +42,7 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButton6" min="-2" max="-2" attributes="0"/>
+              <Component id="jButton6" min="-2" pref="91" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -71,7 +71,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;Lan&#xe7;amentos&lt;p align=&apos;center&apos;&gt;(F2)&lt;/center&gt;&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="Lan&#xe7;amento"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
@@ -104,7 +104,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Sair (F10)"/>
+        <Property name="text" type="java.lang.String" value="Sair "/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ActButtonSair"/>

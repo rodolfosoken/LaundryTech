@@ -19,7 +19,7 @@ public abstract class  ControleRoupa {
        Roupa roupa = new Roupa();
        roupa.setCodRoupa(Integer.parseInt(dataRoupa.get("codRoupa")));
        roupa.setDescricao(dataRoupa.get("descricao"));
-       roupa.setMedida(Integer.parseInt(dataRoupa.get("medida")));
+       roupa.setMedida(dataRoupa.get("medida"));
        roupa.setPreco(Float.parseFloat(dataRoupa.get("preco")));
              
        return roupa.cadRoupa();
@@ -35,4 +35,10 @@ public abstract class  ControleRoupa {
        Roupa r = new Roupa();
        return r.procuraRoupa(descricao);
    }
+   
+   public static int getNum(){
+       Roupa r = new Roupa();
+       return r.getNum();
+   }
+   
 }

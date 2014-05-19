@@ -8,11 +8,15 @@ public class Roupa {
 	private int codRoupa;
 	private String descricao;
 	private float preco;
-	private int medida;
+	private String medida;
 	public Tabela unnamed_Tabela_;
 	public Vector<ROL> unnamed_ROL_ = new Vector<ROL>();
         
         static DAO_roupa dao = new DAO_roupa();
+        
+        public int getNum(){
+            return dao.getNum();
+        }
         
         public DefaultTableModel listaRoupa(){
             return dao.listaRoupa();
@@ -46,11 +50,11 @@ public class Roupa {
 		this.preco = aPreco;
 	}
 
-	public int getMedida() {
+	public String getMedida() {
 		return medida;
 	}
 
-	public void setMedida(int aMedida) {
+	public void setMedida(String aMedida) {
 		this.medida = aMedida;
 	}
 

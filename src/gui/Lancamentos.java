@@ -7,6 +7,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -107,7 +108,7 @@ public class Lancamentos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lançamentos");
 
-        novo.setText("Novo (F2)");
+        novo.setText("Novo ");
         novo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 novoActionPerformed(evt);
@@ -143,7 +144,7 @@ public class Lancamentos extends javax.swing.JFrame {
             tabela.getColumnModel().getColumn(2).setMaxWidth(150);
         }
 
-        jButton6.setText("Sair(F10)");
+        jButton6.setText("Sair");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonActSair(evt);
@@ -162,7 +163,7 @@ public class Lancamentos extends javax.swing.JFrame {
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(novo)
+                        .addComponent(novo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -189,7 +190,13 @@ public class Lancamentos extends javax.swing.JFrame {
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
         // TODO add your handling code here:
         NovoLancamento novoLan = new NovoLancamento();
-        novoLan.setVisible(true);
+        JDialog dia = new JDialog(novoLan);
+        dia.setModal(true);     //cria JDialog modal para travar foco
+        dia.setContentPane(novoLan.getContentPane());
+        dia.setBounds(novoLan.getBounds());
+        dia.setVisible(true);
+        preparaTabela();
+        // novoLan.setVisible(true);
     }//GEN-LAST:event_novoActionPerformed
 
     /**

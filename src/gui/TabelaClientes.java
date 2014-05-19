@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gui;
+
+import javax.swing.JDialog;
 
 /**
  *
@@ -100,7 +101,13 @@ public class TabelaClientes extends javax.swing.JFrame {
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
         // TODO add your handling code here:
         CadastraCliente win = new CadastraCliente();
-        win.setVisible(true);
+        JDialog dia = new JDialog(win);
+        dia.setModal(true);     //cria JDialog modal para travar foco
+        dia.setContentPane(win.getContentPane());
+        dia.setBounds(win.getBounds());
+        dia.setVisible(true);
+        jTable2.setModel(Controle.ControleCliente.listaClientes());
+        //win.setVisible(true);
     }//GEN-LAST:event_novoActionPerformed
 
     /**

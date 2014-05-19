@@ -18,7 +18,6 @@ import javax.swing.*;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
-import org.w3c.dom.events.MouseEvent;
 
 /**
  *
@@ -129,12 +128,12 @@ public class ConsultaClientes extends javax.swing.JFrame {
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 //CadastraCliente cadastra = new CadastraCliente(String.valueOf(JTpesquisa.getText()));
                 tabela.setRowSelectionInterval(0, 0);
-                rowSelected = (int)tabela.getValueAt(tabela.getSelectedRow(),2);
+                rowSelected = (int) tabela.getValueAt(tabela.getSelectedRow(), 2);
                 dispose();
             }
             if ((e.getKeyCode() == KeyEvent.VK_ENTER) && (e.getSource() == tabela)) {
                 tabela.setFocusCycleRoot(true);
-                rowSelected = (int)tabela.getValueAt(tabela.getSelectedRow(),2);
+                rowSelected = (int) tabela.getValueAt(tabela.getSelectedRow(), 2);
                 dispose();
 
                 //VisualizaCliente exibi = new VisualizaCliente(ControleCliente.consultaCliente(tabela.getSelectedRow()));
@@ -166,7 +165,7 @@ public class ConsultaClientes extends javax.swing.JFrame {
 
         @Override
         public void mouseClicked(java.awt.event.MouseEvent me) {
-            rowSelected = (int)tabela.getValueAt(tabela.getSelectedRow(),2);
+            rowSelected = (int) tabela.getValueAt(tabela.getSelectedRow(), 2);
             System.out.println(rowSelected);
             dispose();
         }
@@ -197,7 +196,14 @@ public class ConsultaClientes extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            CadastraCliente cadastra = new CadastraCliente();
+            CadastraCliente win = new CadastraCliente();
+            JDialog dia = new JDialog(win);
+            dia.setModal(true);     //cria JDialog modal para travar foco
+            dia.setContentPane(win.getContentPane());
+            dia.setBounds(win.getBounds());
+            dia.setVisible(true);
+            tabela.setModel(modelo);
+            
         }
     }
 

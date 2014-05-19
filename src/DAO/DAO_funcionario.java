@@ -179,18 +179,18 @@ public class DAO_funcionario {
         
             public DefaultTableModel listaFuncionarios() {
         modelo.setColumnIdentifiers(new Object[]{
-            "CPF", "Nome", "Telefone", "End.", "Cidade"});
+            "Cod.", "Nome", "Cargo", "Setor", "Comissao"});
         modelo.setNumRows(0);
         try {
-            bd.ExecuteQuery("SELECT * FROM laundrytech.clientes");
+            bd.ExecuteQuery("SELECT * FROM laundrytech.funcionarios");
             bd.rs.first();
             do {
                 try {
 
                     modelo.addRow(new Object[]{
-                        bd.rs.getObject("cpf"), bd.rs.getObject("nome"),
-                        bd.rs.getObject("codClient"), bd.rs.getObject("rua"),
-                        bd.rs.getObject("cidade")});
+                        bd.rs.getObject("codFunc"), bd.rs.getObject("nome"),
+                        bd.rs.getObject("cargo"), bd.rs.getObject("setor"),
+                        bd.rs.getObject("comissao")});
                 } catch (SQLException ex) {
                     Logger.getLogger(DAO_funcionario.class.getName()).log(Level.SEVERE, null, ex);
                 }

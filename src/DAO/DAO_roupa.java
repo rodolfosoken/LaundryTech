@@ -73,8 +73,8 @@ public class DAO_roupa {
         }
         return modelo;
     }
-    
-        public DefaultTableModel procuraRoupa(String descricao) {
+
+    public DefaultTableModel procuraRoupa(String descricao) {
 
         String SQL_full = "SELECT * FROM laundrytech.roupas WHERE descricao LIKE '%" + descricao + "%'";
         //faz a busca no banco de dados
@@ -94,6 +94,18 @@ public class DAO_roupa {
             Logger.getLogger(DAO_roupa.class.getName()).log(Level.SEVERE, null, ex);
         }
         return modelo;
+    }
+
+    public static int getNum() {
+        bd = BD.getBD();
+        int qtd = 0;
+        try {
+            qtd = BD.getNumberOfRows("roupas");
+        } catch (Exception ex) {
+            Logger.getLogger(DAO_ROL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return qtd;
     }
 
 }
