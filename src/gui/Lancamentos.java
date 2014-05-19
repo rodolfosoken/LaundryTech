@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -16,13 +20,76 @@ import javax.swing.table.TableCellRenderer;
  */
 public class Lancamentos extends javax.swing.JFrame {
 
+    DefaultTableModel model = new DefaultTableModel();
+
     /**
      * Creates new form Lançamentos
      */
     public Lancamentos() {
         initComponents();
+        preparaTabela();
     }
 
+    private void preparaTabela() {
+
+        model = Controle.ControleRol.listaLancamentos();
+        tabela.setModel(model);
+        //seta o tamanho padrão de cada coluna
+        tabela.getColumnModel().getColumn(0).setMaxWidth(120);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(250);
+        tabela.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tabela.getColumnModel().getColumn(3).setPreferredWidth(60);
+
+        //tabela.setDefaultRenderer(Object.class, render);
+        tabela.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                    boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                //A coluna do status é 3  
+                Object ref = table.getValueAt(row, 3);//Coluna Status  
+                String refs = String.valueOf(table.getValueAt(row, 3));
+                //Coloca cor em todas as linhas,COLUNA(3) que tem o valor "Aberto"  
+                if (ref != null && refs.equals("2")) {//Se Status for igual a "Aberto"  
+                    setBackground(Color.WHITE);//Preenche a linha de branco  
+                    setForeground(new Color(51, 51, 51));//E a fonte de preto  
+                } else if (ref != null && refs.equals("1")) {
+                    setBackground(Color.GREEN);
+                    setForeground(Color.WHITE);
+                } else if (ref != null && refs.equals("0")) {
+                    setBackground(Color.ORANGE);
+                    setForeground(Color.WHITE);
+                } else {
+                    boolean sel = isSelected;
+                    if (sel == true) {
+                        setBackground(getBackground());
+                        setForeground(getForeground());
+                    } else {//Se Status não for "Aberto"   
+                        setBackground(Color.WHITE);//Preenche a linha de branco  
+                        setForeground(new Color(51, 51, 51));//E a fonte de preto  
+                    }
+                }
+                return this;
+            }
+        });
+
+    }
+
+//    public class MyRenderer extends DefaultTableCellRenderer {
+//
+//        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+//            Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+//            Object ref = table.getValueAt(row, 3);
+//            if (ref != null && ref.equals("2")) {
+//                c.setBackground(new java.awt.Color(0, 0, 255));
+//            } else {
+//                c.setBackground(table.getBackground());
+//                c.setForeground(Color.BLACK);
+//            }
+//            return c;
+//        }
+//
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,22 +104,7 @@ public class Lancamentos extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable(){
-
-            public Component prepareRenderer(
-                TableCellRenderer r, int rw, int col){
-                Component c = super.prepareRenderer(r,rw,col);
-                String cod = "123";
-                if(!cod.equals(String.valueOf(jTable1.getValueAt(rw,col)))){
-                    c.setBackground(Color.WHITE);
-                    c.setForeground(Color.BLACK);
-                }else{
-                    c.setBackground(Color.GREEN);
-                }
-                return c;
-            }
-        }
-        ;
+        tabela = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -79,7 +131,7 @@ public class Lancamentos extends javax.swing.JFrame {
 
         jButton4.setText("Cancelar");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -102,10 +154,10 @@ public class Lancamentos extends javax.swing.JFrame {
                 "ROL", "Nome", "Data Emissão"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(150);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(150);
+        jScrollPane1.setViewportView(tabela);
+        if (tabela.getColumnModel().getColumnCount() > 0) {
+            tabela.getColumnModel().getColumn(0).setMaxWidth(150);
+            tabela.getColumnModel().getColumn(2).setMaxWidth(150);
         }
 
         jButton6.setText("Sair(F10)");
@@ -182,7 +234,6 @@ public class Lancamentos extends javax.swing.JFrame {
         // TODO add your handling code here:
         NovoLancamento novoLan = new NovoLancamento();
         novoLan.setVisible(true);
-        dispose();
     }//GEN-LAST:event_novoActionPerformed
 
     /**
@@ -229,7 +280,7 @@ public class Lancamentos extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton novo;
+    private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

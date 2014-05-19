@@ -2,6 +2,7 @@ package Model;
 
 import DAO.DAO_roupa;
 import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 public class Roupa {
 	private int codRoupa;
@@ -12,6 +13,14 @@ public class Roupa {
 	public Vector<ROL> unnamed_ROL_ = new Vector<ROL>();
         
         static DAO_roupa dao = new DAO_roupa();
+        
+        public DefaultTableModel listaRoupa(){
+            return dao.listaRoupa();
+        }
+        
+        public DefaultTableModel procuraRoupa(String descricao){
+            return dao.procuraRoupa(descricao);
+        }
 
 	public int getCodRoupa() {
 		return codRoupa;

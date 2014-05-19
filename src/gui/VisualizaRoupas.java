@@ -17,6 +17,7 @@ public class VisualizaRoupas extends javax.swing.JFrame {
      */
     public VisualizaRoupas() {
         initComponents();
+        jTable1.setModel(Controle.ControleRoupa.listaRoupa());
     }
 
     /**

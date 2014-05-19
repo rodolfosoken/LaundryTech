@@ -290,7 +290,6 @@ public class CadastraCliente extends javax.swing.JFrame {
         if (Controle.ControleCliente.cadastraCliente(dataCliente)) {
             JOptionPane.showMessageDialog(null, "cadastro concluído!");
             finish = true;
-            volta();
             dispose();
         }
 
@@ -298,19 +297,13 @@ public class CadastraCliente extends javax.swing.JFrame {
 
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         //destoi janela
-        volta();
         dispose();
     }//GEN-LAST:event_sairActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        volta();
     }//GEN-LAST:event_formWindowClosing
     
-    public void volta() {
-        Clientes win = new Clientes();
-        win.setVisible(true);
-    }
 
     /**
      * @param args the command line arguments

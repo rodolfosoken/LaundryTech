@@ -660,7 +660,7 @@ public class NovoLancamento extends javax.swing.JFrame {
 
             //dados de entrada
             ROL.put("cliente", cliente.get("codigo"));
-            ROL.put("nome", cliente.get("nome"));
+            ROL.put("nome", nome.getText());
             ROL.put("codigo", numRol.getText());
             ROL.put("emissao", emissao.getText());
             ROL.put("saldo", Saldo.getText());

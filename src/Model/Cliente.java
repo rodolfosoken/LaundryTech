@@ -22,6 +22,10 @@ public class Cliente {
     public boolean salvar() {
         return dao.salvar(this);
     }
+    
+    public DefaultTableModel listaCliente(){
+        return dao.listaClientes();
+    }
 
     public Cliente recupera(int tel) {
         return dao.recupera(tel);

@@ -36,7 +36,7 @@ public class AdicionaItem extends javax.swing.JFrame {
         bd = BD.getBD();
 
         //lista roupas
-        modelo = listaRoupa();
+        modelo = Controle.ControleRoupa.listaRoupa();
         tabela.setModel(modelo);
         //listener
         tabela.addKeyListener(new keyAct());
@@ -264,7 +264,7 @@ public class AdicionaItem extends javax.swing.JFrame {
         public void keyReleased(KeyEvent e) {
             if (JTpesquisa.getText() != null) {
                 String descricao = JTpesquisa.getText();
-                tabela.setModel(procuraRoupa(descricao));
+                tabela.setModel(Controle.ControleRoupa.procuraRoupa(descricao));
             }
 
         }
@@ -306,50 +306,7 @@ public class AdicionaItem extends javax.swing.JFrame {
 
     }
 
-    public DefaultTableModel listaRoupa() {
 
-        modelo.setColumnIdentifiers(new Object[]{"Codigo", "Descricao", "Preco", "Medida"});
-        modelo.setNumRows(0);
-        try {
-            bd.ExecuteQuery("SELECT * FROM laundrytech.roupas");
-            bd.rs.first();
-            do {
-                try {
 
-                    modelo.addRow(new Object[]{
-                        bd.rs.getObject("codRoupa"), bd.rs.getObject("descricao"),
-                        bd.rs.getObject("preco"), bd.rs.getObject("medida"),});
-                } catch (SQLException ex) {
-                    Logger.getLogger(DAO_roupa.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } while (bd.rs.next());
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DAO_roupa.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return modelo;
-    }
-
-    public DefaultTableModel procuraRoupa(String descricao) {
-
-        String SQL_full = "SELECT * FROM laundrytech.roupas WHERE descricao LIKE '%" + descricao + "%'";
-        //faz a busca no banco de dados
-        try {
-            //remove as linhas da consulta anterior    
-            modelo.setNumRows(0);
-
-            bd.ExecuteQuery(SQL_full);
-            while (bd.rs.next()) {
-                modelo.addRow(
-                        new Object[]{
-                            bd.rs.getObject("codRoupa"), bd.rs.getObject("descricao"),
-                            bd.rs.getObject("preco"), bd.rs.getObject("medida"),});
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DAO_roupa.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return modelo;
-    }
 
 }

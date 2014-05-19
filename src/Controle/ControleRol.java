@@ -10,6 +10,7 @@ import Model.Cliente;
 import Model.ROL;
 import java.util.Date;
 import java.util.HashMap;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -29,9 +30,15 @@ public class ControleRol {
         r.setTipoEntrega(rol.get("tipoEnt"));
         r.setUnnamed_Atendente_(a.recupera(rol.get("atendente")));
         r.setUnnamed_Cliente_(c.recupera(Integer.parseInt(rol.get("cliente"))));
-        r.setValorTotal(Float.parseFloat(rol.get("saldo")));        
+        r.setValorTotal(Float.parseFloat(rol.get("saldo")));
+        r.setNome(rol.get("nome"));
         
         return r.salvar(roupas);
+    }
+    
+    public static DefaultTableModel listaLancamentos(){
+        ROL r = new ROL();
+        return r.listaLancamentos();
     }
 
     public static int qtdROL() {

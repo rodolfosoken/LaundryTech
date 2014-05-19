@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +19,7 @@ import javax.swing.JOptionPane;
 public class DAO_ROL {
 
     static BD bd;
+    DefaultTableModel modelo = new DefaultTableModel();
 
     public DAO_ROL() {
         bd = BD.getBD();
@@ -28,10 +30,10 @@ public class DAO_ROL {
         try {
 
             String SQL = "INSERT INTO laundrytech.rol "
-                    + " (status, `valorTotal`, desconto, emissao, `data`, `tipoEntrega`, cliente, atendente) "
-                    + "VALUES ('" + r.getStatPag() + "', '"+r.getValorTotal() +"', '" + r.getDesconto() + "', '" + r.getEmissao() + "', '"
+                    + " (status, `valorTotal`, desconto, emissao, `data`, `tipoEntrega`, cliente, atendente, nome) "
+                    + "VALUES ('" + r.getStatPag() + "', '" + r.getValorTotal() + "', '" + r.getDesconto() + "', '" + r.getEmissao() + "', '"
                     + r.getData() + "', '" + r.getTipoEntrega() + "', '" + r.getUnnamed_Cliente_().getCodClient() + "', '"
-                    + r.getUnnamed_Atendente_().getSenha() + "')";
+                    + r.getUnnamed_Atendente_().getSenha()+ "', '"+ r.getNome() + "')";
 
             BD.insert(SQL);
 
@@ -76,10 +78,35 @@ public class DAO_ROL {
         try {
             qtd = BD.getNumberOfRows("rol");
         } catch (Exception ex) {
-            Logger.getLogger(DAO_cliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAO_ROL.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return qtd;
+    }
+
+    public DefaultTableModel listaLancamentos() {
+        modelo.setColumnIdentifiers(new Object[]{
+            "ROL", "Nome", "Emissao", "Status"});
+        modelo.setNumRows(0);
+        try {
+            bd.ExecuteQuery("SELECT * FROM laundrytech.rol");
+            bd.rs.first();
+            do {
+                try {
+
+                    modelo.addRow(new Object[]{
+                        bd.rs.getObject("codigo"), bd.rs.getObject("nome"),
+                        bd.rs.getObject("emissao"), bd.rs.getObject("status")
+                       });
+                } catch (SQLException ex) {
+                    Logger.getLogger(DAO_ROL.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } while (bd.rs.next());
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_ROL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return modelo;
     }
 
 }

@@ -7,6 +7,7 @@
 package Controle;
 import Model.Roupa;
 import java.util.HashMap;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Rodolfo
@@ -25,4 +26,13 @@ public abstract class  ControleRoupa {
    }
    
    
+   public static DefaultTableModel listaRoupa(){
+       Roupa r = new Roupa();
+       return r.listaRoupa();
+   }
+   
+   public static DefaultTableModel procuraRoupa(String descricao){
+       Roupa r = new Roupa();
+       return r.procuraRoupa(descricao);
+   }
 }

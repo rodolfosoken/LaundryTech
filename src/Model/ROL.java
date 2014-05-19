@@ -3,9 +3,11 @@ package Model;
 import DAO.DAO_ROL;
 import java.util.Date;
 import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 public class ROL {
-
+    
+    private String nome;
     private int codigo;
     private int statPag;
     private float valorTotal;
@@ -25,6 +27,10 @@ public class ROL {
 
     public static int qtdROL() {
         return DAO_ROL.qtdROL();
+    }
+    
+    public DefaultTableModel listaLancamentos(){
+        return dao.listaLancamentos();
     }
 
     /**
@@ -165,6 +171,20 @@ public class ROL {
      */
     public void setData(String data) {
         this.data = data;
+    }
+
+    /**
+     * @return the nome
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    /**
+     * @param nome the nome to set
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
 }
