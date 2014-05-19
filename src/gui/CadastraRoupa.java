@@ -20,6 +20,7 @@ public class CadastraRoupa extends javax.swing.JFrame {
      */
     public CadastraRoupa() {
         initComponents();
+        codigo.setText(String.valueOf(Controle.ControleRoupa.getNum()));
     }
 
     /**
@@ -64,7 +65,9 @@ public class CadastraRoupa extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Código");
 
-        codigo.setText("123");
+        codigo.setEditable(false);
+        codigo.setBackground(new java.awt.Color(204, 204, 204));
+        codigo.setForeground(new java.awt.Color(0, 0, 0));
         codigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 codigoActionPerformed(evt);
@@ -81,14 +84,13 @@ public class CadastraRoupa extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Descrição");
 
-        medida.setText("43");
+        medida.setText("Unidade");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Cadastro de Roupa");
 
         descricao.setColumns(20);
         descricao.setRows(5);
-        descricao.setText("Descrever a roupa");
         jScrollPane1.setViewportView(descricao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

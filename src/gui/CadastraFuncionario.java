@@ -233,7 +233,7 @@ public class CadastraFuncionario extends javax.swing.JFrame {
         if (gerente.isSelected()) {
             f.put("nome", nome.getText());
             f.put("senha", senha.getText());
-            f.put("setor", nome.getText());
+            f.put("setor", setor.getText());
             if (Controle.ControleFuncionario.cadFuncionario(f, 2)) {
                 JOptionPane.showMessageDialog(null, "Gerente cadastrado com sucesso!");
                 dispose();

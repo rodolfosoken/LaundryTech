@@ -33,7 +33,7 @@
                   </Group>
                   <Component id="jScrollPane1" alignment="0" pref="665" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="novo" min="-2" max="-2" attributes="0"/>
+                      <Component id="novo" min="-2" pref="85" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -58,7 +58,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="novo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Novo (F2)"/>
+        <Property name="text" type="java.lang.String" value="Novo "/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="novoActionPerformed"/>
@@ -108,7 +108,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButton6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Sair(F10)"/>
+        <Property name="text" type="java.lang.String" value="Sair"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonActSair"/>
