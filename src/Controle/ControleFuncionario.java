@@ -6,14 +6,21 @@
 package Controle;
 
 import Model.Atendente;
+import Model.Funcionario;
 import Model.Gerente;
 import java.util.HashMap;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Rodolfo
  */
 public abstract class ControleFuncionario {
+    
+    public static DefaultTableModel listaFuncionarios(){
+        Atendente a = new Atendente();
+        return a.listaFuncionarios();
+    }
 
     public static boolean cadFuncionario(HashMap<String, String> dataFuncionario, int cargo) {
         if (cargo == 2) {

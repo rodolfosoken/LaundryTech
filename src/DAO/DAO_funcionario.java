@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,6 +20,7 @@ import javax.swing.JOptionPane;
 public class DAO_funcionario {
 
     static BD bd;
+        DefaultTableModel modelo = new DefaultTableModel();
 
     public DAO_funcionario() {
         bd = BD.getBD();
@@ -173,5 +175,31 @@ public class DAO_funcionario {
      
         return qtd;
 }
+        
+        
+            public DefaultTableModel listaFuncionarios() {
+        modelo.setColumnIdentifiers(new Object[]{
+            "CPF", "Nome", "Telefone", "End.", "Cidade"});
+        modelo.setNumRows(0);
+        try {
+            bd.ExecuteQuery("SELECT * FROM laundrytech.clientes");
+            bd.rs.first();
+            do {
+                try {
+
+                    modelo.addRow(new Object[]{
+                        bd.rs.getObject("cpf"), bd.rs.getObject("nome"),
+                        bd.rs.getObject("codClient"), bd.rs.getObject("rua"),
+                        bd.rs.getObject("cidade")});
+                } catch (SQLException ex) {
+                    Logger.getLogger(DAO_funcionario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } while (bd.rs.next());
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_funcionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return modelo;
+    }
 
 }

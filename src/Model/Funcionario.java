@@ -1,6 +1,7 @@
 package Model;
 
 import DAO.DAO_funcionario;
+import javax.swing.table.DefaultTableModel;
 
 public class Funcionario {
 	private String nome;
@@ -9,6 +10,10 @@ public class Funcionario {
 	private int cargo;
         
         DAO_funcionario dao = new DAO_funcionario();
+        
+        public DefaultTableModel listaFuncionarios(){
+            return dao.listaFuncionarios();
+        }
 
     /**
      * @return the nome

@@ -35,6 +35,7 @@ public class TabelaClientes extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Clientes");
 
         Sair.setText("Sair");
         Sair.addActionListener(new java.awt.event.ActionListener() {
