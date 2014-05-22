@@ -131,7 +131,7 @@ public class DAO_cliente {
     }
     
         public boolean excluiCliente(int tel) {
-        boolean existe = false;
+        boolean existe = true;
 
         String SQL = "DELETE FROM laundrytech.clientes WHERE codClient LIKE '" + tel + "'";
         try {
