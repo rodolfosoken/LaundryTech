@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 
@@ -72,6 +73,11 @@ public class CadastraCliente extends javax.swing.JFrame {
         });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sairKeyPressed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Complem.");
@@ -100,34 +106,84 @@ public class CadastraCliente extends javax.swing.JFrame {
                 codigoActionPerformed(evt);
             }
         });
+        codigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sairKeyPressed(evt);
+            }
+        });
 
         nome.setText("nome");
+        nome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sairKeyPressed(evt);
+            }
+        });
 
         endereco.setText("rua");
+        endereco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sairKeyPressed(evt);
+            }
+        });
 
         complem.setText("comple");
+        complem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sairKeyPressed(evt);
+            }
+        });
 
         bairro.setText("bairro");
+        bairro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sairKeyPressed(evt);
+            }
+        });
 
         uf.setText("uf");
+        uf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sairKeyPressed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Apto.");
 
         apto.setText("1051");
+        apto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sairKeyPressed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Cidade");
 
         cidade.setText("cidade");
+        cidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sairKeyPressed(evt);
+            }
+        });
 
         jLabel10.setText("CPF:");
 
         cpf.setText("401");
+        cpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sairKeyPressed(evt);
+            }
+        });
 
         jLabel11.setText("CEP");
 
         cep.setText("09726");
+        cep.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sairKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -230,6 +286,11 @@ public class CadastraCliente extends javax.swing.JFrame {
                 sairActionPerformed(evt);
             }
         });
+        sair.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sairKeyPressed(evt);
+            }
+        });
 
         ok.setText("OK (F8)");
         ok.addActionListener(new java.awt.event.ActionListener() {
@@ -303,6 +364,13 @@ public class CadastraCliente extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosing
+
+    private void sairKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sairKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_F10){
+            dispose();
+        }
+    }//GEN-LAST:event_sairKeyPressed
     
 
     /**

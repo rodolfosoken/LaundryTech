@@ -64,6 +64,9 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sairKeyPressed"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -248,32 +251,48 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="codigoActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sairKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="nome">
           <Properties>
             <Property name="text" type="java.lang.String" value="nome"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sairKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="endereco">
           <Properties>
             <Property name="text" type="java.lang.String" value="rua"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sairKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="complem">
           <Properties>
             <Property name="text" type="java.lang.String" value="comple"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sairKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="bairro">
           <Properties>
             <Property name="text" type="java.lang.String" value="bairro"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sairKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="uf">
           <Properties>
             <Property name="text" type="java.lang.String" value="uf"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sairKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
@@ -287,6 +306,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="1051"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sairKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
@@ -300,6 +322,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="cidade"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sairKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
@@ -310,6 +335,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="401"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sairKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
@@ -320,6 +348,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="09726"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sairKeyPressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -329,6 +360,7 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sairActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sairKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="ok">

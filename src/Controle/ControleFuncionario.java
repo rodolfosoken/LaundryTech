@@ -6,7 +6,6 @@
 package Controle;
 
 import Model.Atendente;
-import Model.Funcionario;
 import Model.Gerente;
 import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;

@@ -8,7 +8,6 @@ package Controle;
 import Model.Atendente;
 import Model.Cliente;
 import Model.ROL;
-import java.util.Date;
 import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Rodolfo
  */
-public class ControleRol {
+public abstract class ControleRol {
     
     public static boolean geraRol(HashMap<String,String> rol , String[][] roupas){
         Atendente a = new Atendente();

@@ -174,15 +174,27 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="nome">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="actPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="senha">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="actPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="setor">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="actPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="codigo">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="actPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="atendente">
           <Properties>
@@ -193,6 +205,7 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="atendenteActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="actPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="gerente">
@@ -204,6 +217,7 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gerenteActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="actPressed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -214,6 +228,7 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sairActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="actPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="ok">

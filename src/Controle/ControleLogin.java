@@ -12,7 +12,7 @@ import Model.Login;
  *
  * @author Rodolfo
  */
-public class ControleLogin {
+public abstract class ControleLogin {
     
     public static boolean getPermissao(String senha, String login, int acesso){
         Login log = new Login();

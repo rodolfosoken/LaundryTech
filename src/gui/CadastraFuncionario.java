@@ -6,6 +6,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -69,7 +70,30 @@ public class CadastraFuncionario extends javax.swing.JFrame {
 
         jLabel6.setText("Setor");
 
+        nome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                actPressed(evt);
+            }
+        });
+
+        senha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                actPressed(evt);
+            }
+        });
+
+        setor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                actPressed(evt);
+            }
+        });
+
         codigo.setEditable(false);
+        codigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                actPressed(evt);
+            }
+        });
 
         buttonGroup1.add(atendente);
         atendente.setText("Atendente");
@@ -78,12 +102,22 @@ public class CadastraFuncionario extends javax.swing.JFrame {
                 atendenteActionPerformed(evt);
             }
         });
+        atendente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                actPressed(evt);
+            }
+        });
 
         buttonGroup1.add(gerente);
         gerente.setText("Gerente");
         gerente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gerenteActionPerformed(evt);
+            }
+        });
+        gerente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                actPressed(evt);
             }
         });
 
@@ -149,6 +183,11 @@ public class CadastraFuncionario extends javax.swing.JFrame {
         sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sairActionPerformed(evt);
+            }
+        });
+        sair.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                actPressed(evt);
             }
         });
 
@@ -257,6 +296,13 @@ public class CadastraFuncionario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Selecione o cargo");
         }
     }//GEN-LAST:event_okActionPerformed
+
+    private void actPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_actPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_F10){
+            dispose();
+        }
+    }//GEN-LAST:event_actPressed
 
     private void desabilitar() {
         setor.setEditable(false);

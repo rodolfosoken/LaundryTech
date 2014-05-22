@@ -6,6 +6,7 @@
 package gui;
 
 import java.awt.Window;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -73,6 +74,11 @@ public class Login extends javax.swing.JFrame {
                 okActionPerformed(evt);
             }
         });
+        ok.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                senhaKeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Usuário :");
@@ -81,6 +87,11 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Login");
 
         senha.setText("jPasswordField1");
+        senha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                senhaKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -172,6 +183,14 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_okActionPerformed
+
+    private void senhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_senhaKeyPressed
+        // TODO add your handling code here:
+                // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            okActionPerformed(null);
+        }
+    }//GEN-LAST:event_senhaKeyPressed
 
     /**
      * @param args the command line arguments
