@@ -65,13 +65,11 @@ public class DAO_clienteTest {
 
         //recupera
         System.out.println("recupera");
-
         int result2 = instance.recupera(tel).getCodClient();
         assertEquals(c.getCodClient(), result2);
 
         //exclui
         System.out.println("exclui");
-
         boolean expResult3 = false;
         boolean result3 = instance.excluiCliente(tel);
         assertEquals(expResult3, result3);
