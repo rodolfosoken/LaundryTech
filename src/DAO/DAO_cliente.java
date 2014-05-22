@@ -129,6 +129,21 @@ public class DAO_cliente {
 
         return existe;
     }
+    
+        public boolean excluiCliente(int tel) {
+        boolean existe = false;
+
+        String SQL = "DELETE FROM laundrytech.clientes WHERE codClient LIKE '" + tel + "'";
+        try {
+            BD.insert(SQL);
+            existe = this.consultaCliente(tel);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return existe;
+    }
+    
 
     public DefaultTableModel listaClientes() {
         modelo.setColumnIdentifiers(new Object[]{

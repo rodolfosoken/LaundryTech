@@ -94,7 +94,7 @@ public class ConsultaClientes extends javax.swing.JFrame {
         c.add(BorderLayout.WEST, c4);
         setLocation(0, 30);
         setSize(850, 480);
-        setVisible(true);
+        //setVisible(true); //desativado por estar dentro do JDialog
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
     }

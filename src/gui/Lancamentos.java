@@ -105,7 +105,7 @@ public class Lancamentos extends javax.swing.JFrame {
         tabela = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lançamentos");
 
         novo.setText("Novo ");

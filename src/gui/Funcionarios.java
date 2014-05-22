@@ -36,7 +36,7 @@ public class Funcionarios extends javax.swing.JFrame {
         Ok = new javax.swing.JButton();
         sair = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         novo.setText("Novo");
 

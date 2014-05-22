@@ -41,7 +41,7 @@ public class VisualizaCliente extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         procurar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
